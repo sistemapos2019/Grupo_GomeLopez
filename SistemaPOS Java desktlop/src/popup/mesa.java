@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package popup;
 
 /**
@@ -11,9 +7,7 @@ package popup;
  */
 public class mesa extends javax.swing.JFrame {
 
-    /**
-     * Creates new form mesa
-     */
+
     public mesa() {
         initComponents();
                 this.setLocationRelativeTo(null);
@@ -37,7 +31,10 @@ public class mesa extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Mesa");
+        setAlwaysOnTop(true);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(198, 241, 214));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -130,6 +127,7 @@ public class mesa extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         dispose();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

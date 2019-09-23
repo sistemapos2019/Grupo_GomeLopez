@@ -5,7 +5,7 @@
  */
 package popup;
 
-import ventanas.Usuario;
+import ventanas_old.Usuario;
 
 /**
  *

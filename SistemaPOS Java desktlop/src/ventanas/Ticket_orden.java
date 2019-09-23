@@ -5,6 +5,8 @@
  */
 package ventanas;
 
+import ventanas_old.Dashboard;
+
 /**
  *
  * @author Miguel

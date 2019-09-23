@@ -5,7 +5,7 @@
  */
 package popup;
 
-import ventanas.Dashboard;
+import ventanas_old.Dashboard;
 
 /**
  *
