@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -101,6 +102,22 @@ public class Conexion {
         } catch (Exception e) { }
         
         return id_ob;
+    }
+    
+    
+    //LLENAR LISTA DE LA COLUMNA numero 1***************************************
+    //para llenar un jcbx
+    public static ArrayList<String> LLenarLista(String x){
+        resultado = obtenerValores(x);
+        ArrayList<String> lista = new ArrayList<>();
+
+        try {
+            while(resultado.next() ){
+            lista.add(resultado.getString(1));
+            }
+        } catch (Exception e) {
+        }
+        return lista;
     }
     
 }

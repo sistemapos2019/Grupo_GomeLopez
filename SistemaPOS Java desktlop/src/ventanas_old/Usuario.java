@@ -5,7 +5,7 @@
  */
 package ventanas_old;
 
-import popup.usuario;
+import codigo.cod_usuario;
 import ventanas.Administracion;
 
 /**
@@ -222,7 +222,7 @@ public class Usuario extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        usuario a = new usuario();
+        cod_usuario a = new cod_usuario();
         a.setVisible(true);
         
         
@@ -230,7 +230,7 @@ public class Usuario extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        usuario a = new usuario();
+        cod_usuario a = new cod_usuario();
         a.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 

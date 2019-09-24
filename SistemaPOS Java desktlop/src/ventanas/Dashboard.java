@@ -2,6 +2,7 @@
 package ventanas;
 
 import java.awt.CardLayout;
+import javax.swing.UIManager;
 
 /**
  *
@@ -151,7 +152,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/casa 32.png"))); // NOI18N
-        jButton1.setText("Dashboard");
+        jButton1.setText("    Dashboard");
         jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +163,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/nuevo 32.png"))); // NOI18N
-        jButton2.setText("Nueva orden");
+        jButton2.setText("    Nueva orden");
         jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +174,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/modificar 32.png"))); // NOI18N
-        jButton4.setText("Modificar");
+        jButton4.setText("    Modificar");
         jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -184,7 +185,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/mas 32.png"))); // NOI18N
-        jButton5.setText("Agregar Prod.");
+        jButton5.setText("    Agregar Producto");
         jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +196,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/boton-de-impresion.png"))); // NOI18N
-        jButton6.setText("Imprimir");
+        jButton6.setText("    Imprimir");
         jButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +207,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ahorrar-dinero.png"))); // NOI18N
-        jButton7.setText("Cobrar");
+        jButton7.setText("    Cobrar");
         jButton7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +218,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/grafico-de-barras (1).png"))); // NOI18N
-        jButton9.setText("Estadisticas");
+        jButton9.setText("    Estadisticas");
         jButton9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +229,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ajustes.png"))); // NOI18N
-        jButton14.setText("Administracion");
+        jButton14.setText("    Administracion");
         jButton14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton14.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton14.addActionListener(new java.awt.event.ActionListener() {
@@ -1204,7 +1205,14 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                } catch (Exception e){
+                    
+                }
                 new Dashboard().setVisible(true);
+                
+                
             }
         });
     }

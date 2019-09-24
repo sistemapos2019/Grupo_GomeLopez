@@ -5,7 +5,6 @@
  */
 package ventanas;
 
-import popup.producto;
 
 /**
  *

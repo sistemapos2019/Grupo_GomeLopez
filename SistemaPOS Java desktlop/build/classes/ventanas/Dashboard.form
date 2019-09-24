@@ -137,7 +137,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/iconos/casa 32.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Dashboard"/>
+            <Property name="text" type="java.lang.String" value="    Dashboard"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
@@ -153,7 +153,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/iconos/nuevo 32.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nueva orden"/>
+            <Property name="text" type="java.lang.String" value="    Nueva orden"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
@@ -169,7 +169,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/iconos/modificar 32.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Modificar"/>
+            <Property name="text" type="java.lang.String" value="    Modificar"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
@@ -185,7 +185,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/iconos/mas 32.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Agregar Prod."/>
+            <Property name="text" type="java.lang.String" value="    Agregar Producto"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
@@ -201,7 +201,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/iconos/boton-de-impresion.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Imprimir"/>
+            <Property name="text" type="java.lang.String" value="    Imprimir"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
@@ -217,7 +217,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/iconos/ahorrar-dinero.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Cobrar"/>
+            <Property name="text" type="java.lang.String" value="    Cobrar"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
@@ -233,7 +233,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/iconos/grafico-de-barras (1).png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Estadisticas"/>
+            <Property name="text" type="java.lang.String" value="    Estadisticas"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
@@ -249,7 +249,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/iconos/ajustes.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Administracion"/>
+            <Property name="text" type="java.lang.String" value="    Administracion"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>

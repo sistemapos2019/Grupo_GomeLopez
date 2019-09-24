@@ -169,7 +169,7 @@ public class mesas extends javax.swing.JDialog {
         
             dispose(); 
         } else {
-            System.out.println("Falta datos");
+            //System.out.println("Falta datos");
         }
         
     }//GEN-LAST:event_bt_guardarActionPerformed

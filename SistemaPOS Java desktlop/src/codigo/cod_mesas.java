@@ -11,12 +11,14 @@ public class cod_mesas {
     
     
     //llenar TABLA envia el modelo y la sentencia sql, recibe el modelo lleno*******
-    public static DefaultTableModel llenar_tabla(DefaultTableModel md){
+    public static DefaultTableModel llenar_tabla(){
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo = md;
+        modelo.addColumn("id");
+        modelo.addColumn("nombre");
+       
         String q= "SELECT * FROM mesa";
-        md =Conexion.llenar_tabla(q, md);
-        return md;
+        modelo =Conexion.llenar_tabla(q, modelo);
+        return modelo;
     }
     
     public static void agregarMesa(String nombre){
