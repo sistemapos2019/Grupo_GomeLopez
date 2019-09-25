@@ -1,6 +1,5 @@
 package codigo;
 
-import static codigo.cod_mesas.eliminar_mesa;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,15 +25,9 @@ public class cod_categorias {
     }
     
     public static void eliminar(String x){
-        
-        
-        int test = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion");
-
-        if (test==0) {   
+   
             String q = "DELETE FROM categoria WHERE id=('"+ x +"') ";
             Conexion.ejecutar(q); 
-        }
-        
         
     }
     

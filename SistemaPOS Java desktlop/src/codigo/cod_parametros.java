@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class cod_parametros {
     
-    String id, nombre, valor;
+    String id, nombre, valor, nombreR, descripcion, telef, direcc;
     
     //llenar TABLA envia el modelo y la sentencia sql, recibe el modelo lleno*******
     public static DefaultTableModel llenar_tabla(){
@@ -32,7 +32,26 @@ public class cod_parametros {
         Conexion.ejecutar(q1+q2);
     }
     
+    public static cod_parametros inicio(){
+        cod_parametros x = new cod_parametros();
+        
+        x.setNombreR(Conexion.valor("Nombre"));
+        x.setDescripcion(Conexion.valor("Descripcion"));
+        x.setTelef(Conexion.valor("Telefono"));
+        x.setDirecc(Conexion.valor("Direccion"));
+        
+        return x;
+    }
     
+    
+    public static boolean valorLogin(){
+        
+        String a = Conexion.valor("Login en cada pantalla");
+        if (a.equals("1")==true) {
+            return true;
+        }
+        return false;
+    }
     
     
     /*******************************
@@ -65,6 +84,39 @@ public class cod_parametros {
     public void setValor(String valor) {
         this.valor = valor;
     }
+
+    public String getNombreR() {
+        return nombreR;
+    }
+
+    public void setNombreR(String nombreR) {
+        this.nombreR = nombreR;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getTelef() {
+        return telef;
+    }
+
+    public void setTelef(String telef) {
+        this.telef = telef;
+    }
+
+    public String getDirecc() {
+        return direcc;
+    }
+
+    public void setDirecc(String direcc) {
+        this.direcc = direcc;
+    }
+    
     
     
     

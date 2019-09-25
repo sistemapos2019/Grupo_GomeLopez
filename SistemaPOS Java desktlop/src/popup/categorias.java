@@ -12,6 +12,7 @@ public class categorias extends javax.swing.JDialog {
    
     //varibale para identificar si es nuevo o modif
     public boolean m =true;
+    public boolean exito=false; //true exito, false fracaso en ejecutar sql
     
     
     public categorias(java.awt.Frame parent, boolean modal) {
@@ -160,9 +161,11 @@ public class categorias extends javax.swing.JDialog {
             if (m==true) {
 
                 cod_categorias.agregar_categoria(this.tf_nombre.getText(), this.tf_id.getText());
+                exito=true;
             }
             else {
                 cod_categorias.modificar(this.tf_nombre.getText(), this.tf_id.getText());
+                exito=true;
             }
 
             dispose();

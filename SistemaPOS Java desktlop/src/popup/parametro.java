@@ -90,6 +90,7 @@ public class parametro extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setText("Valor");
 
+        ta_nombre.setEditable(false);
         ta_nombre.setColumns(20);
         ta_nombre.setRows(5);
         jScrollPane1.setViewportView(ta_nombre);

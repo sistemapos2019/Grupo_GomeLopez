@@ -46,14 +46,9 @@ public class cod_mesas {
     
     //eliminar
     public static void eliminar(String x){
-        int test = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion");
-
-        if (test==0) {    
+ 
             eliminar_mesa(x);   
-        }
-            
-        
-        
+  
     }
     
     

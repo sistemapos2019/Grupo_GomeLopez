@@ -13,6 +13,7 @@ public class mesas extends javax.swing.JDialog {
      */
     
     public boolean m =true;
+    public boolean exito=false; //true exito, false fracaso en ejecutar sql
     
     public mesas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -161,9 +162,11 @@ public class mesas extends javax.swing.JDialog {
                 
                 
                 cod_mesas.agregar_mesa(this.tf_nombre.getText(), this.tf_id.getText());
+                exito=true;
             }
             else {
                 cod_mesas.modificar(this.tf_nombre.getText(), this.tf_id.getText());
+                exito=true;
             }
            
         

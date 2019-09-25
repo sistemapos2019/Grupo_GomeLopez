@@ -223,7 +223,7 @@ public class Usuario extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         cod_usuario a = new cod_usuario();
-        a.setVisible(true);
+        //a.setVisible(true);
         
         
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -231,7 +231,7 @@ public class Usuario extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         cod_usuario a = new cod_usuario();
-        a.setVisible(true);
+        //a.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

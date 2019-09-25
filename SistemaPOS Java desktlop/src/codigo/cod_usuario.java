@@ -37,12 +37,8 @@ public class cod_usuario {
     
     public static void eliminar(String x) {
 
-        int test = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion");
-
-        if (test == 0) {
             String q = "DELETE FROM usuario WHERE id=('" + x + "') ";
             Conexion.ejecutar(q);
-        }
 
     }
     

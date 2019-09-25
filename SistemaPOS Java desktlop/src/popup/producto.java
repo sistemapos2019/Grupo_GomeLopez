@@ -12,6 +12,8 @@ public class producto extends javax.swing.JDialog {
     
     //varibale para identificar si es nuevo o modif --true si es nuevo --false modif
     public boolean m =true;
+    public boolean exito=false; //true exito, false fracaso en ejecutar sql
+    
     
     
     public producto(java.awt.Frame parent, boolean modal) {
@@ -232,13 +234,17 @@ public class producto extends javax.swing.JDialog {
             if (m==true) {
 
                 cod_productos.agregar(x);
+                exito=true;
+                
             }
             else {
                 cod_productos.modificar(x);
+                exito=true;
             }
 
             dispose();
         } else {
+            
             //System.out.println("Falta datos");
         }
     }//GEN-LAST:event_bt_guardarActionPerformed

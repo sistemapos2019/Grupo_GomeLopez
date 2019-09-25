@@ -8,7 +8,6 @@ package ventanas_old;
 import ventanas_old.Modificar_orden;
 import ventanas_old.Orden;
 import ventanas_old.Cobrar;
-import popup.agregar_producto;
 import javax.swing.UIManager;
 import ventanas.Administracion;
 
@@ -308,9 +307,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        agregar_producto a = new agregar_producto();
-        
-        a.setVisible(true);
+
         //dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 

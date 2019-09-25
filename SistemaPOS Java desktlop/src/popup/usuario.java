@@ -11,6 +11,7 @@ public class usuario extends javax.swing.JDialog {
     
     //varibale para identificar si es nuevo o modif --true si es nuevo --false modif
     public boolean m =true;
+    public boolean exito=false; //true exito, false fracaso en ejecutar sql
     
     public usuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -246,9 +247,11 @@ public class usuario extends javax.swing.JDialog {
             if (m==true) {
 
                 cod_usuario.agregar(x);
+                exito=true;
             }
             else {
                 cod_usuario.modificar(x);
+                exito=true;
             }
 
             dispose();

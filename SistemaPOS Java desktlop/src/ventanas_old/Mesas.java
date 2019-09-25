@@ -5,7 +5,6 @@
  */
 package ventanas_old;
 
-import popup.mesa;
 import ventanas.Administracion;
 
 /**
@@ -204,15 +203,13 @@ public class Mesas extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        mesa a = new mesa();
-        a.setVisible(true);
+      
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        mesa a = new mesa();
-        a.setVisible(true);
+ 
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

@@ -56,13 +56,8 @@ public class cod_productos {
 
     public static void eliminar(String x) {
 
-        int test = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion");
-
-        if (test == 0) {
             String q = "DELETE FROM producto WHERE id=('" + x + "') ";
             Conexion.ejecutar(q);
-        }
-
     }
 
     public static ArrayList<String> llenarJcbx() {
