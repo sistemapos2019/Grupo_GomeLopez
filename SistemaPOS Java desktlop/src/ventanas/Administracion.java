@@ -12,6 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -176,7 +177,7 @@ public class Administracion extends javax.swing.JFrame {
         jl_nombreRestaurante5 = new javax.swing.JLabel();
         tbtn_p_TkP = new javax.swing.JToggleButton();
         tbtn_p_tkNP = new javax.swing.JToggleButton();
-        bt_prod_eliminar2 = new javax.swing.JButton();
+        btn_parametrosEditar = new javax.swing.JButton();
         tabla = new javax.swing.JPanel();
         btn_usuario_modf1 = new javax.swing.JButton();
         tf_parametro = new javax.swing.JTextField();
@@ -236,7 +237,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panel_botones.setBackground(new java.awt.Color(31, 171, 137));
+        panel_botones.setBackground(new java.awt.Color(102, 102, 102));
 
         btn_inicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_inicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/casa 32.png"))); // NOI18N
@@ -345,7 +346,7 @@ public class Administracion extends javax.swing.JFrame {
         panel_botonesLayout.setVerticalGroup(
             panel_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_botonesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(btn_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_productos, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,7 +358,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addComponent(btn_compras, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addComponent(btn_parametros, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_bitacoras, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -423,7 +424,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addComponent(jl_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jl_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(372, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -573,7 +574,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addComponent(bt_prod_modif, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(bt_prod_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addGap(108, 108, 108)
@@ -703,7 +704,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
                         .addGap(23, 23, 23))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(btn_categ_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -836,7 +837,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
                         .addGap(23, 23, 23))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btn_Mesa_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1030,7 +1031,7 @@ public class Administracion extends javax.swing.JFrame {
                     .addComponent(jLabel26)
                     .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel27)
@@ -1184,7 +1185,7 @@ public class Administracion extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(btn_usuario_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1498,12 +1499,12 @@ public class Administracion extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        bt_prod_eliminar2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        bt_prod_eliminar2.setText("Editar");
-        bt_prod_eliminar2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        bt_prod_eliminar2.addActionListener(new java.awt.event.ActionListener() {
+        btn_parametrosEditar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_parametrosEditar.setText("Editar");
+        btn_parametrosEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_parametrosEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_prod_eliminar2ActionPerformed(evt);
+                btn_parametrosEditarActionPerformed(evt);
             }
         });
 
@@ -1519,7 +1520,7 @@ public class Administracion extends javax.swing.JFrame {
                         .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(bt_prod_eliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_parametrosEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
@@ -1535,8 +1536,8 @@ public class Administracion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_prod_eliminar2)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(btn_parametrosEditar)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         panel_Parametro.add(jPanel30, "modoFacil");
@@ -1614,7 +1615,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(tablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_usuario_modf1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
         );
 
@@ -1628,7 +1629,7 @@ public class Administracion extends javax.swing.JFrame {
         );
         jPanel34Layout.setVerticalGroup(
             jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 583, Short.MAX_VALUE)
         );
 
         panel_Parametro.add(jPanel34, "card3");
@@ -1802,7 +1803,7 @@ public class Administracion extends javax.swing.JFrame {
                         .addComponent(bt_eliminar_bitac, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(btn_eliminarT_bitac, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
 
@@ -1837,7 +1838,7 @@ public class Administracion extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -2479,12 +2480,11 @@ public class Administracion extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_btn_usuario_agregarActionPerformed
 
+    //buscar usuario
     private void tf_usuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_usuarioKeyTyped
         //
         trs = new TableRowSorter(this.tb_usuarios.getModel());
-        
-                
-        
+     
         tf_usuario.addKeyListener(new KeyAdapter(){
             @Override
             
@@ -2495,9 +2495,7 @@ public class Administracion extends javax.swing.JFrame {
             } else {
                 trs.setRowFilter(RowFilter.regexFilter("(?i)"+tf_usuario.getText(), cbx_usuario.getSelectedIndex()-1 ));
             }
-                
-                
-                
+     
             }
         });
         
@@ -2579,9 +2577,18 @@ public class Administracion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cbx_bitacoraItemStateChanged
 
-    private void bt_prod_eliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_prod_eliminar2ActionPerformed
-
-    }//GEN-LAST:event_bt_prod_eliminar2ActionPerformed
+    private void btn_parametrosEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_parametrosEditarActionPerformed
+        this.guardarParametro();
+        if (btn_parametrosEditar.getText().equals("Editar")) {
+           this.activo_parametro(true);
+           btn_parametrosEditar.setText("Guardar");
+        }else {
+           this.guardarParametro();
+           this.activo_parametro(false);
+           btn_parametrosEditar.setText("Editar");
+        }
+        
+    }//GEN-LAST:event_btn_parametrosEditarActionPerformed
 
     private void btn_usuario_modf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuario_modf1ActionPerformed
         // TODO add your handling code here:
@@ -2608,6 +2615,7 @@ public class Administracion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_usuario_modf1ActionPerformed
 
+    
     private void tf_parametroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_parametroKeyTyped
         //
         trs = new TableRowSorter(this.tb_parametros.getModel());
@@ -2689,17 +2697,7 @@ public class Administracion extends javax.swing.JFrame {
 }
     
     public void tabla_productos(){
-       DefaultTableModel modelo = new DefaultTableModel();
-       
-       modelo.addColumn("id");
-       modelo.addColumn("nombre");
-       modelo.addColumn("Precio");
-       modelo.addColumn("Inventario");
-       modelo.addColumn("Preparado");
-       modelo.addColumn("Categoria");
-       modelo=cod_productos.llenar_tablaP(modelo);
-      
-       this.tb_productos.setModel(modelo);
+        this.tb_productos.setModel(cod_productos.llenar_tablaP());
    }
     
     public void tabla_mesas() {   
@@ -2710,15 +2708,14 @@ public class Administracion extends javax.swing.JFrame {
        this.tb_parametros.setModel(cod_parametros.llenar_tabla());     
 }
     
-    //
     public void tabla_usuarios(){
-        
         this.tb_usuarios.setModel(cod_usuario.llenar_tabla());
     }
     
     public void tabla_bitacoras(){
         this.tb_bitacoras.setModel(cod_bitacoras.llenar_tabla());
     }
+    
     
     public void inicio(){
         
@@ -2803,6 +2800,62 @@ public class Administracion extends javax.swing.JFrame {
 
     }
     
+    //obtener los valores de parametros para guardar
+    private void guardarParametro(){
+        cod_parametros p = new cod_parametros();
+        ArrayList<cod_parametros> x = new ArrayList<cod_parametros>();
+        
+        
+        String v = tf_p_nmbr.getText();
+        x.add(new cod_parametros("2", v) );
+        
+        v = tf_p_desc.getText();
+        x.add(new cod_parametros("3", v) );
+        
+        v =(tf_p_telf.getText());
+        x.add(new cod_parametros("4", v) );
+        
+        v= (tf_p_nit.getText());
+        x.add(new cod_parametros("5", v) );
+        
+        v= (tf_p_dirc.getText());
+        x.add(new cod_parametros("7", v) );
+        
+        
+        if (tbtn_p_TkP.isSelected()==true) {
+            v="1";
+        } else {
+            v="0";
+        }      
+        x.add(new cod_parametros("8", v) );
+        
+        
+        if (tbtn_p_tkNP.isSelected()==true) {
+            v=("1");
+        } else {
+            v=("0");
+        }      
+        x.add(new cod_parametros("9", v) );
+
+    
+        v = (js_p_TMxR.getValue().toString());
+        x.add(new cod_parametros("10", v) );
+        
+        v=(js_p_TMxP.getValue().toString());
+        x.add(new cod_parametros("11", v) );
+        
+        p.setId("12");
+        if (tbtn_p_login.isSelected()==true) {
+            v=("1");
+        } else {
+            v=("0");
+        }      
+        x.add(new cod_parametros("12", v) );
+        
+        cod_parametros.modicarParametros(x);
+        llenarParametro();
+}
+    
     
     
     
@@ -2857,7 +2910,6 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JButton bt_mesa_eliminar;
     private javax.swing.JButton bt_mesa_mod;
     private javax.swing.JButton bt_prod_eliminar;
-    private javax.swing.JButton bt_prod_eliminar2;
     private javax.swing.JButton bt_prod_modif;
     private javax.swing.JButton btn_Mesa_nuevo;
     private javax.swing.JButton btn_Parametro_mostar;
@@ -2870,6 +2922,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JButton btn_mesas;
     private javax.swing.JButton btn_mostrar_bitac;
     private javax.swing.JButton btn_parametros;
+    private javax.swing.JButton btn_parametrosEditar;
     private javax.swing.JButton btn_prod_nuevo;
     private javax.swing.JButton btn_productos;
     private javax.swing.JButton btn_usuario_agregar;

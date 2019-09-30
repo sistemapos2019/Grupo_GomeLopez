@@ -29,7 +29,7 @@ public class Estadisticas extends javax.swing.JFrame {
         titulo = new javax.swing.JPanel();
         jtitilo = new javax.swing.JLabel();
         panel_botones = new javax.swing.JPanel();
-        btn_productos = new javax.swing.JButton();
+        btn_inventarios = new javax.swing.JButton();
         btn_categorias = new javax.swing.JButton();
         btn_mesas = new javax.swing.JButton();
         btn_compras = new javax.swing.JButton();
@@ -153,13 +153,13 @@ public class Estadisticas extends javax.swing.JFrame {
 
         panel_botones.setBackground(new java.awt.Color(31, 171, 137));
 
-        btn_productos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_productos.setText("Inventarios");
-        btn_productos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_productos.setPreferredSize(new java.awt.Dimension(100, 25));
-        btn_productos.addActionListener(new java.awt.event.ActionListener() {
+        btn_inventarios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_inventarios.setText("Inventarios");
+        btn_inventarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_inventarios.setPreferredSize(new java.awt.Dimension(100, 25));
+        btn_inventarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_productosActionPerformed(evt);
+                btn_inventariosActionPerformed(evt);
             }
         });
 
@@ -220,7 +220,7 @@ public class Estadisticas extends javax.swing.JFrame {
         panel_botones.setLayout(panel_botonesLayout);
         panel_botonesLayout.setHorizontalGroup(
             panel_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_productos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_inventarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_categorias, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
             .addComponent(btn_mesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_compras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -232,7 +232,7 @@ public class Estadisticas extends javax.swing.JFrame {
             panel_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_botonesLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(btn_productos, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_inventarios, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btn_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -1231,13 +1231,13 @@ public class Estadisticas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_productosActionPerformed
+    private void btn_inventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inventariosActionPerformed
         // TODO add your handling code here:
 
         cardLayout.show(panel3, "Productos");
         //this.jtitilo.setText("Dashboard");
         
-    }//GEN-LAST:event_btn_productosActionPerformed
+    }//GEN-LAST:event_btn_inventariosActionPerformed
 
     private void btn_categoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_categoriasActionPerformed
         cardLayout.show(panel3, "Categorias");
@@ -1392,9 +1392,9 @@ public class Estadisticas extends javax.swing.JFrame {
     private javax.swing.JButton btn_bitacoras;
     private javax.swing.JButton btn_categorias;
     private javax.swing.JButton btn_compras;
+    private javax.swing.JButton btn_inventarios;
     private javax.swing.JButton btn_mesas;
     private javax.swing.JButton btn_parametros;
-    private javax.swing.JButton btn_productos;
     private javax.swing.JButton btn_usuarios;
     private javax.swing.JPanel inicio;
     private javax.swing.JButton jButton1;

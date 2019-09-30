@@ -1,6 +1,7 @@
 
 package codigo;
 
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -9,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class cod_parametros {
     
-    String id, nombre, valor, nombreR, descripcion, telef, direcc;
+    private String id, nombre, valor, nombreR, descripcion, telef, direcc;
     
     //llenar TABLA envia el modelo y la sentencia sql, recibe el modelo lleno*******
     public static DefaultTableModel llenar_tabla(){
@@ -27,7 +28,7 @@ public class cod_parametros {
     public static void modificar (cod_parametros x){
         
         
-        String q1 = "UPDATE parametro SET nombre =('"+ x.getNombre() +"'), valor= ('"+ x.getValor() ;
+        String q1 = "UPDATE parametro SET valor= ('"+ x.getValor() ;
         String q2 = "') WHERE id=('"+ x.getId() + "')";
         Conexion.ejecutar(q1+q2);
     }
@@ -53,6 +54,17 @@ public class cod_parametros {
         return false;
     }
     
+    public static void modicarParametros(ArrayList x){
+        ArrayList<cod_parametros> a = new ArrayList<cod_parametros>();
+        a=x;
+        
+        for (int i = 0; i < a.size(); i++) {
+            modificar(new cod_parametros(a.get(i).getId(), a.get(i).getValor()));
+            
+        }
+        
+    }
+    
     
     /*******************************
     
@@ -60,6 +72,12 @@ public class cod_parametros {
     
     public cod_parametros() {
     }
+
+    public cod_parametros(String id, String valor) {
+        this.id = id;
+        this.valor = valor;
+    }
+    
 
     public String getId() {
         return id;

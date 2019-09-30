@@ -13,13 +13,19 @@ public class cod_productos {
     String id, nombre, precio, inventario, preparado, categoria;
 
     //llenar TABLA envia el modelo y la sentencia sql, recibe el modelo lleno*******
-    public static DefaultTableModel llenar_tablaP(DefaultTableModel md) {
+    public static DefaultTableModel llenar_tablaP() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo = md;
+        modelo.addColumn("id");
+        modelo.addColumn("nombre");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Inventario");
+        modelo.addColumn("Preparado");
+        modelo.addColumn("Categoria");
+        
         String q = "SELECT * FROM producto";
-        md = Conexion.llenar_tabla(q, md);
-        md = llenarTabla2(md);
-        return md;
+        modelo  = Conexion.llenar_tabla(q, modelo);
+        modelo = llenarTabla2(modelo);
+        return modelo;
     }
 
     //**************************************************************************

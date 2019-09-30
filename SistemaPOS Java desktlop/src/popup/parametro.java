@@ -172,7 +172,6 @@ public class parametro extends javax.swing.JDialog {
             cod_parametros x = new cod_parametros();
 
             x.setId(tf_id.getText());
-            x.setNombre(ta_nombre.getText());
             x.setValor(ta_valor.getText());
 
             cod_parametros.modificar(x);

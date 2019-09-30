@@ -8,7 +8,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Miguel
  */
 public class cod_usuario {
-    String id, nombre, login, clave, pin, rol;
+    private String id, nombre, login, clave, pin, rol, error;
+    private boolean estado; 
     
     //llenar TABLA envia el modelo y la sentencia sql, recibe el modelo lleno*******
     public static DefaultTableModel llenar_tabla(){
@@ -58,6 +59,18 @@ public class cod_usuario {
         String q1 = "UPDATE usuario SET nombreCompleto =('"+ x.getNombre() +"'), login= ('"+ x.getLogin()+"'), clave = ('" + x.getClave()+"'), pin =('" +x.getPin()+"')," ;
         String q2 = " rol=('"+ x.getRol()  +"') WHERE id=('"+ x.getId() + "')";
         Conexion.ejecutar(q1+q2);
+    }
+    
+    public static cod_usuario usuario(String login, String clave, String pin, int tipo){
+
+        switch (tipo){
+            case 1:
+                return Conexion.usuarioClave(login, clave);
+            case 2:
+                return Conexion.usuarioPin(pin);
+            
+        }
+        return null;
     }
     
     
@@ -125,5 +138,22 @@ public class cod_usuario {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
     
 }

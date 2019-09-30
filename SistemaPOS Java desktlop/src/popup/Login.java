@@ -1,7 +1,10 @@
 package popup;
 
 import codigo.Conexion;
+import codigo.cod_parametros;
+import codigo.cod_usuario;
 import java.awt.Color;
+import ventanas.Dashboard;
 
 
 /**
@@ -10,12 +13,20 @@ import java.awt.Color;
  */
 public class Login extends javax.swing.JDialog {
 
+    private int modo=1;
+    public int dash=1;
+    
 
    
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         
         
+        
+        initComponents();
+    }
+    
+    public Login() {
         
         initComponents();
     }
@@ -31,7 +42,7 @@ public class Login extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        bt_guardar = new javax.swing.JButton();
+        bt_entrar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jl_titulo = new javax.swing.JLabel();
         bt_cancelar = new javax.swing.JButton();
@@ -46,11 +57,11 @@ public class Login extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.POPUP);
 
-        bt_guardar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        bt_guardar.setText("Entrar");
-        bt_guardar.addActionListener(new java.awt.event.ActionListener() {
+        bt_entrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_entrar.setText("Entrar");
+        bt_entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_guardarActionPerformed(evt);
+                bt_entrarActionPerformed(evt);
             }
         });
 
@@ -162,7 +173,7 @@ public class Login extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(bt_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(bt_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bt_entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jl_notif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -179,7 +190,7 @@ public class Login extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bt_entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
@@ -208,17 +219,22 @@ public class Login extends javax.swing.JDialog {
     
     
     
-    private void bt_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarActionPerformed
-        Conexion x = comprobar();
+    private void bt_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_entrarActionPerformed
+        //Conexion x = comprobar();
+        cod_usuario x = Comprobar();
         
-        if (x.isA()==true) {
+        if (x.isEstado()==true) {
+            if (dash==3) {
+                Dashboard a = new  Dashboard();
+                a.setVisible(true);
+            }
             dispose();
         } else {
             this.jl_notif.setText(x.getError());
             this.jl_notif.setForeground(Color.RED);
         }
         
-    }//GEN-LAST:event_bt_guardarActionPerformed
+    }//GEN-LAST:event_bt_entrarActionPerformed
 
     private void bt_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelarActionPerformed
         // TODO add your handling code here:
@@ -243,6 +259,10 @@ public class Login extends javax.swing.JDialog {
         return x;
     }
     
+    public cod_usuario Comprobar(){
+        return cod_usuario.usuario(this.tf_login.getText(), String.valueOf(this.tf_clave.getPassword()), String.valueOf(this.tf_clave.getPassword()), modo);
+    }
+    
     public void error(String x){
         this.jl_notif.setText(x);
     }
@@ -252,13 +272,20 @@ public class Login extends javax.swing.JDialog {
         this.tf_login.setText("");
     }
     
-    public void modoPin(boolean x){
-        this.jl2.setText("Pin");
-        this.jl_1.setVisible(!x);
-        this.tf_login.setVisible(!x);
+    public void modoPin(boolean a){
+        if (a==true) {
+            modo=2;
+            this.jl2.setText("Pin");
+            this.jl_1.setVisible(false);
+            this.tf_login.setVisible(false);
+        }
     }
     
+    
 
+    private void dashboard(){
+        
+    }
     
     
     
@@ -308,7 +335,7 @@ public class Login extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_cancelar;
-    private javax.swing.JButton bt_guardar;
+    private javax.swing.JButton bt_entrar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
