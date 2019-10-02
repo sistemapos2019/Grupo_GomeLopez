@@ -18,10 +18,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Conexion {
     
-    static Connection con=null;
-    static Statement sentencia;
-    static ResultSet resultado;
-    static ResultSetMetaData rsMetaData;
+    private static Connection con=null;
+    private static Statement sentencia;
+    private static ResultSet resultado;
+    private static ResultSetMetaData rsMetaData;
     
     
     private boolean a;  //true si es correcto el inicio
@@ -62,7 +62,7 @@ public class Conexion {
     }
     
     
-    public static ResultSet obtenerValores(String q){
+    private static ResultSet obtenerValores(String q){
         conectar();
         try {
             resultado = sentencia.executeQuery(q);
@@ -158,7 +158,6 @@ public class Conexion {
         
         try {
             if (resultado.next()) {
-                System.out.println("");
                 if (clave.equals(resultado.getString("clave")) || pin.equals(resultado.getString("pin"))) {
                     
                     x.setA(true);
@@ -214,7 +213,6 @@ public class Conexion {
         
         try {
             if (resultado.next()) {
-                System.out.println("");
                 if (ps.equals(resultado.getString("clave"))) {
                     
                     x.setEstado(true);
@@ -338,6 +336,39 @@ public class Conexion {
     }
     
     
+    /*
+            para comprobar que existe el registro
+    */
+    
+    public static boolean comprobarExiste(String q){
+        boolean env = false;
+        resultado = obtenerValores(q);
+        try {           
+            while(resultado.next()){
+                env = true;
+            }
+        } catch (Exception e) {
+        }
+        
+        cierraConexion();
+        return env;
+    }
+    
+    /*
+            obtener el un valor especifico
+    */
+    public static String obtnerRegitro(String q){
+        resultado = obtenerValores(q);
+        String nombre = "";
+        
+        try {
+            resultado.first();
+            nombre = resultado.getString(1) ;
+        } catch (Exception e) { }
+        
+        cierraConexion();
+        return nombre;
+    }
     
     //***************************
     // para el login

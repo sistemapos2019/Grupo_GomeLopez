@@ -121,15 +121,21 @@ public class cod_orden {
         return fila;
     }
     
-    public static DefaultTableModel cantidad (int v, int fila, DefaultTableModel tabla){
+    public static DefaultTableModel cantidad (double v, int fila, DefaultTableModel tabla){
         
-        int cantidad = Integer.parseInt(tabla.getValueAt(fila, 2).toString()) + v;
         
-        double precioU = Double.parseDouble(tabla.getValueAt(fila, 1).toString()) * v;
-        double precioT = Double.parseDouble(tabla.getValueAt(fila, 3).toString());
-        precioT = precioT + precioU;
-        tabla.setValueAt(precioT, fila, 3);
-        tabla.setValueAt(cantidad, fila, 2);
+        
+        double cantidad = Double.parseDouble(tabla.getValueAt(fila, 2).toString()) + v;
+        
+        if (cantidad<1) {
+            return tabla;
+        } else {
+            double precioU = Double.parseDouble(tabla.getValueAt(fila, 1).toString()) * v;
+            double precioT = Double.parseDouble(tabla.getValueAt(fila, 3).toString());
+            precioT = precioT + precioU;
+            tabla.setValueAt(precioT, fila, 3);
+            tabla.setValueAt(cantidad, fila, 2);
+        }
         
         return tabla;
     }
@@ -257,7 +263,6 @@ public class cod_orden {
             cantidad= Double.parseDouble(md.getValueAt(i, 2).toString());
             suma= precio * cantidad;
             
-            System.out.println(suma);
             
             md.setValueAt(suma, i, 3);
         }
@@ -266,8 +271,145 @@ public class cod_orden {
     }
     
     
+    /*
+            Cobrar orden
+    */
+    public static void cobrar(String orden){
+        String q = "UPDATE orden SET estado = 'CC' WHERE id='"+orden+"'";
+        Conexion.ejecutar(q);
+    }
     
     
+    
+    /*
+                Guardar detalle a orden existente
+    */
+    public static void DetalleOrdenExistente(DefaultTableModel md, String orden, double tt, boolean agregarP){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = md;
+        cod_detalleOrden x = new cod_detalleOrden();
+        String q;
+        String q2;
+        
+        if (agregarP==true) {
+            String ttAnterior="SELECT total FROM orden WHERE id='" + orden + "'";
+            ttAnterior = Conexion.obtnerRegitro(ttAnterior);
+            tt = Double.parseDouble(ttAnterior) + tt;
+
+            Conexion.ejecutar("UPDATE orden SET total='"+ tt +"' WHERE id= '"+ orden +"' ");
+        }
+        
+        
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+
+            q = modelo.getValueAt(i, 0).toString();
+            String c= "SELECT id FROM producto WHERE nombre='"+q +"'";
+            int id = Conexion.id(c);
+            
+            x.setCantidad(modelo.getValueAt(i, 2).toString() );
+            x.setIdOrden(orden);
+            x.setIdProducto(Integer.toString(id));
+            x.setPu(modelo.getValueAt(i, 1).toString());
+            
+            String reg = "SELECT cantidad FROM detalleorden WHERE idOrden='"+ orden +"' && idProducto ='" +id + "' ";
+            
+            if (Conexion.comprobarExiste(reg) == true) {
+                double cAnterior = Double.parseDouble(Conexion.obtnerRegitro(reg) );
+                double cMas= Double.parseDouble( x.getCantidad() );
+                
+                cMas = cAnterior + cMas;
+                
+                q = "UPDATE detalleorden SET cantidad=('";
+                q2 = cMas+"') WHERE idOrden='"+ orden +"' && idProducto ='" +id + "' " ;
+
+                Conexion.ejecutar(q+q2);
+                
+            } else {
+                //x.semodelo.getValueAt(i, 3).toString();
+                q = "INSERT INTO detalleorden (idOrden, idProducto, cantidad, precioUnitario) VALUES (' ";
+                q2 = x.getIdOrden()+"', '"+ x.getIdProducto()+"', '"+ x.getCantidad() +"', '"+ x.getPu()+ "')";
+
+                //System.out.println(q+q2);
+                Conexion.ejecutar(q+q2);
+            }     
+            
+        }
+    }
+    
+    
+    
+    /******************************************************************************************************************
+     *                                Guardar orden modificada
+    *******************************************************************************************************************/
+    public static void guardaOrdenModif(cod_orden x, ArrayList<String> prodEli, String orden, DefaultTableModel modelo){
+        double t = Double.parseDouble(x.getTotal());
+        
+        eliminarProductos(prodEli, orden);
+        String q1;
+        if (x.getLlevar().equals("1")) {
+            q1 = "UPDATE orden SET llevar='1', idMesa=NULL, cliente='"+ x.getCliente() +"', total='"+ t +"' WHERE id='"+ orden +"'" ;
+            Conexion.ejecutar(q1);
+        }else{
+            x.setIdMesa(Integer.toString(Conexion.id("SELECT id FROM mesa WHERE mesa='"+x.getIdMesa() +"'")));
+            q1 = "UPDATE orden SET llevar='0', idMesa='"+ x.getIdMesa() +"', cliente='"+ x.getCliente() +"', total='"+ t +"' WHERE id='"+ orden +"'" ;
+            Conexion.ejecutar(q1);
+        }
+        
+        modifDetalleOrden(modelo, orden);
+    }
+    
+    
+    
+    private static void eliminarProductos(ArrayList<String> prodEli, String orden){
+        
+        for (int i = 0; i < prodEli.size(); i++) {
+
+            String q = prodEli.get(i);
+            //System.out.println(q);
+            String c= "SELECT id FROM producto WHERE nombre='"+q +"'";
+            int id = Conexion.id(c);
+            
+            q= "DELETE FROM detalleorden WHERE idOrden='"+ orden+ "' and idProducto='"+ id+ "'";
+
+            Conexion.ejecutar(q);
+            
+        }
+        
+    }
+    
+    //desde la ventana de modificar
+    private static void modifDetalleOrden(DefaultTableModel md, String orden){
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = md;
+        cod_detalleOrden x = new cod_detalleOrden();
+        String q;
+        String q2;
+        
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+
+            q = modelo.getValueAt(i, 0).toString();
+            String c= "SELECT id FROM producto WHERE nombre='"+q +"'";
+            int id = Conexion.id(c);
+            
+            x.setCantidad(modelo.getValueAt(i, 2).toString() );
+            
+            q = "UPDATE detalleorden SET cantidad=('";
+            q2 = x.getCantidad()+"') WHERE idOrden='"+ orden +"' && idProducto ='" +id + "' " ;
+
+            Conexion.ejecutar(q+q2);
+   
+        }
+        
+    }
+    
+    
+    //cerrar orden
+    public static void cerrarOrden(String orden){
+        String q = "UPDATE orden SET estado ='CC' WHERE id='" + orden +"'" ;
+        Conexion.ejecutar(q);
+    }
     
     
     

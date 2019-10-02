@@ -2,13 +2,13 @@
 package ventanas;
 
 import codigo.cod_Dashboard;
+import codigo.cod_bitacoras;
 import codigo.cod_orden;
-import codigo.cod_parametros;
 import codigo.cod_usuario;
 import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.UIManager;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import popup.Login;
 
@@ -21,14 +21,31 @@ public class Dashboard extends javax.swing.JFrame {
    
     private cod_usuario usuario = new cod_usuario();
     CardLayout cardLayout;
+    private final boolean loginR; //valor para si se requerira login en cada pantalla
+    private int tOrden; //1 si es nueva, 2 si es modificar, 3 si es agregar produ - Para el boton guardar
+    private String ventana; //la ventana que este actualmente visible
+    private final ArrayList<String> prodEliminados = new ArrayList<>();
+    private String orden;
     
-    public Dashboard() {
+    
+    
+    public Dashboard(boolean login, cod_usuario user) {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         cardLayout = (CardLayout)(this.panel3.getLayout());
         Dashboard();
         llevar();
+        
+        loginR = login;
+        usuario = user;
+        if (login==false) {
+            this.jl_usuario.setText(usuario.getNombre());
+        }
+        ventana ="el sistema";
+        registrarB(1);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,7 +60,7 @@ public class Dashboard extends javax.swing.JFrame {
         titulo = new javax.swing.JPanel();
         jtitulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        lbUsuario = new javax.swing.JLabel();
+        jl_usuario = new javax.swing.JLabel();
         panel_botones = new javax.swing.JPanel();
         btn_dashboard = new javax.swing.JButton();
         btn_orden = new javax.swing.JButton();
@@ -61,6 +78,7 @@ public class Dashboard extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_dashboard = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         Orden = new javax.swing.JPanel();
         N_orden = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -94,8 +112,30 @@ public class Dashboard extends javax.swing.JFrame {
         btn_sumarCantidad = new javax.swing.JButton();
         btn_eliminarfila = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        Cobrar = new javax.swing.JPanel();
         Modificar = new javax.swing.JPanel();
+        Cobrar = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        tf_Ctotal = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        tf_cEntregado = new javax.swing.JFormattedTextField();
+        tf_cPropina = new javax.swing.JFormattedTextField();
+        tf_Cvuelto = new javax.swing.JFormattedTextField();
+        btn_cCobrar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
+        tf_Ccliente = new javax.swing.JTextField();
+        tf_Cmesero = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tb_cobroDetalle = new javax.swing.JTable();
+        jl_Corden = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jl_cobrarTitulo = new javax.swing.JLabel();
+        btn_cerrarOrden = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema POS");
@@ -110,12 +150,21 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/usuario.png"))); // NOI18N
+        jLabel1.setToolTipText("salir");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+        });
 
-        lbUsuario.setBackground(new java.awt.Color(255, 255, 255));
-        lbUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbUsuario.setText("Usuario");
+        jl_usuario.setBackground(new java.awt.Color(255, 255, 255));
+        jl_usuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jl_usuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jl_usuario.setText("Usuario");
 
         javax.swing.GroupLayout tituloLayout = new javax.swing.GroupLayout(titulo);
         titulo.setLayout(tituloLayout);
@@ -125,7 +174,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(208, 208, 208)
                 .addComponent(jtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jl_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -137,7 +186,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(tituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -294,6 +343,13 @@ public class Dashboard extends javax.swing.JFrame {
         tb_dashboard.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tb_dashboard);
 
+        jButton1.setText("Dashboard para llevar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout DashboardLayout = new javax.swing.GroupLayout(Dashboard);
         Dashboard.setLayout(DashboardLayout);
         DashboardLayout.setHorizontalGroup(
@@ -311,22 +367,27 @@ public class Dashboard extends javax.swing.JFrame {
                                     .addComponent(jTextField1)
                                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addGap(23, 23, 23))
         );
         DashboardLayout.setVerticalGroup(
             DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DashboardLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DashboardLayout.createSequentialGroup()
+                        .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DashboardLayout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
 
@@ -575,6 +636,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         jButton10.setText("Cobrar");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout detalle_ordenLayout = new javax.swing.GroupLayout(detalle_orden);
         detalle_orden.setLayout(detalle_ordenLayout);
@@ -661,19 +727,6 @@ public class Dashboard extends javax.swing.JFrame {
         panel3.add(Orden, "Orden");
         Orden.getAccessibleContext().setAccessibleParent(Orden);
 
-        javax.swing.GroupLayout CobrarLayout = new javax.swing.GroupLayout(Cobrar);
-        Cobrar.setLayout(CobrarLayout);
-        CobrarLayout.setHorizontalGroup(
-            CobrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1157, Short.MAX_VALUE)
-        );
-        CobrarLayout.setVerticalGroup(
-            CobrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 668, Short.MAX_VALUE)
-        );
-
-        panel3.add(Cobrar, "Cobrar");
-
         javax.swing.GroupLayout ModificarLayout = new javax.swing.GroupLayout(Modificar);
         Modificar.setLayout(ModificarLayout);
         ModificarLayout.setHorizontalGroup(
@@ -686,6 +739,230 @@ public class Dashboard extends javax.swing.JFrame {
         );
 
         panel3.add(Modificar, "Modificar");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel14.setText("Total:");
+
+        tf_Ctotal.setEditable(false);
+        tf_Ctotal.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel16.setText("Total entregado:");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel17.setText("Propina:");
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel20.setText("Vuelto:");
+
+        tf_cEntregado.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00;(¤#,##0.00)"))));
+        tf_cEntregado.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        tf_cEntregado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_cEntregadoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_cEntregadoKeyTyped(evt);
+            }
+        });
+
+        tf_cPropina.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
+        tf_cPropina.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        tf_Cvuelto.setEditable(false);
+        tf_Cvuelto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00;(¤#,##0.00)"))));
+        tf_Cvuelto.setText("0.0");
+        tf_Cvuelto.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        btn_cCobrar.setText("Cobrar");
+        btn_cCobrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cCobrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_Cvuelto, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(tf_Ctotal, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(tf_cEntregado)
+                            .addComponent(tf_cPropina)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_cCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_Ctotal, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_cEntregado))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_cPropina, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_Cvuelto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addComponent(btn_cCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel15.setText("Cliente:");
+
+        tf_Ccliente.setEditable(false);
+
+        tf_Cmesero.setEditable(false);
+
+        jLabel21.setText("Mesero:");
+
+        tb_cobroDetalle.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cnt", "Prod.", "Precio", "Total"
+            }
+        ));
+        jScrollPane5.setViewportView(tb_cobroDetalle);
+
+        jl_Corden.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jl_Corden.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_Corden.setText("Orden #");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jl_Corden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(tf_Cmesero))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tf_Ccliente))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jl_Corden)
+                .addGap(13, 13, 13)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(tf_Ccliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21)
+                    .addComponent(tf_Cmesero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jl_cobrarTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jl_cobrarTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_cobrarTitulo.setText("Orden ");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jl_cobrarTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jl_cobrarTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        btn_cerrarOrden.setText("Cerrar orden");
+        btn_cerrarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cerrarOrdenActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CobrarLayout = new javax.swing.GroupLayout(Cobrar);
+        Cobrar.setLayout(CobrarLayout);
+        CobrarLayout.setHorizontalGroup(
+            CobrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CobrarLayout.createSequentialGroup()
+                .addContainerGap(102, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92)
+                .addGroup(CobrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_cerrarOrden, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CobrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(103, Short.MAX_VALUE))
+        );
+        CobrarLayout.setVerticalGroup(
+            CobrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CobrarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CobrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CobrarLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(CobrarLayout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_cerrarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))))
+        );
+
+        panel3.add(Cobrar, "Cobrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -720,23 +997,25 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btn_ordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenActionPerformed
         //nueva orden
-        login(true, "Orden", 1);
-   
+        ventana = "orden nueva";
+        tOrden =1;
+        login(true, "Orden", 1);    
     }//GEN-LAST:event_btn_ordenActionPerformed
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         // ***Modificar***
         if (tb_dashboard.getSelectedRow()!=-1) {
             login(false, "Orden", 2);
+            tOrden =2;
             
-            traerOrden(tb_dashboard.getSelectedRow());
         }    
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     private void btn_agregarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarProdActionPerformed
         // **agregar producto
         if (tb_dashboard.getSelectedRow()!=-1) {
-            login(false, "Orden", 3);
+            tOrden =3;
+            login(true, "Orden", 3);
         }
     }//GEN-LAST:event_btn_agregarProdActionPerformed
 
@@ -747,7 +1026,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void btn_cobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cobrarActionPerformed
         // cobrar orden
         if (tb_dashboard.getSelectedRow()!=-1) {
-            login(false, "Cobrar", 4);
+            login(true, "Cobrar", 4);
         }
     }//GEN-LAST:event_btn_cobrarActionPerformed
 
@@ -767,21 +1046,35 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btn_restarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restarCantidadActionPerformed
         // TODO add your handling code here:
-        this.ModificarCantidad(-1, tb_detalleOrden.getSelectedRow());
-        this.total();
+        if (tb_detalleOrden.getSelectedRow()!=-1) {
+            this.ModificarCantidad(-1.0, tb_detalleOrden.getSelectedRow());
+            this.total();
+        }
+        
     }//GEN-LAST:event_btn_restarCantidadActionPerformed
 
     private void btn_sumarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sumarCantidadActionPerformed
         // TODO add your handling code here:
-        this.ModificarCantidad(1, tb_detalleOrden.getSelectedRow());
-        this.total();
+        if (tb_detalleOrden.getSelectedRow()!=-1) {
+            this.ModificarCantidad(1.0, tb_detalleOrden.getSelectedRow());
+            this.total();
+        }
+        
     }//GEN-LAST:event_btn_sumarCantidadActionPerformed
 
     private void btn_eliminarfilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarfilaActionPerformed
-        DefaultTableModel md = new DefaultTableModel();
-        md = (DefaultTableModel) tb_detalleOrden.getModel();
-        md.removeRow(tb_detalleOrden.getSelectedRow());
-        this.total();
+         
+        if (tb_detalleOrden.getSelectedRow()!=-1) {
+            if (tOrden==2) {
+                this.prodEliminados.add(tb_detalleOrden.getValueAt(tb_detalleOrden.getSelectedRow(), 0).toString());
+            }
+            
+            DefaultTableModel md = new DefaultTableModel();
+            md = (DefaultTableModel) tb_detalleOrden.getModel();
+            md.removeRow(tb_detalleOrden.getSelectedRow());
+            this.total(); 
+        }
+        
     }//GEN-LAST:event_btn_eliminarfilaActionPerformed
 
     private void btn_eliminarfila2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarfila2ActionPerformed
@@ -813,12 +1106,82 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btn_enviarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarOrdenActionPerformed
         // TODO add your handling code here:
-        if (validarOrden()==true) {
-            this.guardarOrden();
-            Dashboard();
-        }     
+        switch (tOrden){
+            case 1:
+                if (validarOrden()==true) {
+                    this.guardarOrden();
+                    Dashboard();
+                }
+                break;
+            case 2:
+                guardarOrdenModif();
+                break;
+            case 3:
+                agregarProductos();
+                break;
+        }
+        
     }//GEN-LAST:event_btn_enviarOrdenActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        dispose();
+        Inicio a = new Inicio();
+        a.iniciar();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void btn_cCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cCobrarActionPerformed
+        // 
+        cobrarOrden();
+    }//GEN-LAST:event_btn_cCobrarActionPerformed
+
+    private void tf_cEntregadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cEntregadoKeyTyped
+            
+        char []p={'1','2','3','4','5','6','7','8','9','0','.'};
+        int b=0;
+        for(int i=0;i<=10;i++){
+        if (p[i]==evt.getKeyChar()){b=1;}
+ 
+        }
+        if(b==0){
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_tf_cEntregadoKeyTyped
+
+    private void tf_cEntregadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cEntregadoKeyReleased
+        // TODO add your handling code here:
+        double total = Double.parseDouble(tf_Ctotal.getText());
+        double rs=0.0;
+        try {
+            double entreg = Double.parseDouble(tf_cEntregado.getText());
+            rs = -total + entreg;
+        } catch (Exception e) {
+        }
+        
+        
+        tf_Cvuelto.setText(String.valueOf(rs));
+    }//GEN-LAST:event_tf_cEntregadoKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Dashboard_llevar a = new Dashboard_llevar();
+        a.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void btn_cerrarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarOrdenActionPerformed
+        // TODO add your handling code here:
+        cod_orden.cerrarOrden(orden);
+        bitacoraOrden(5);
+    }//GEN-LAST:event_btn_cerrarOrdenActionPerformed
+
+    
     
     
     /**************************************************************************
@@ -835,13 +1198,16 @@ public class Dashboard extends javax.swing.JFrame {
     }
     private void modificar_orden(String orden){
         panelesOrden(true, false, false, true);
-        
+        tabla_detalle();
+        prodEliminados.clear();
+        traerOrden(tb_dashboard.getSelectedRow());
     }
     private void agregar_aOrden(String orden){
         panelesOrden(false, true, true, true);
         lista_Categoria();
         tabla_detalle();
     }
+    
     
     
     private void lista_Categoria(){
@@ -856,7 +1222,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void detalle_orden(int x){
         this.tb_detalleOrden.setModel(cod_orden.detalleOrden(x, (DefaultTableModel) tb_productos.getModel(), (DefaultTableModel) tb_detalleOrden.getModel()));
     }
-    private void ModificarCantidad(int v, int fila){
+    private void ModificarCantidad(double v, int fila){
         this.tb_detalleOrden.setModel(cod_orden.cantidad(v, fila, (DefaultTableModel)tb_detalleOrden.getModel()));
     }
     private void tabla_detalle(){
@@ -877,6 +1243,7 @@ public class Dashboard extends javax.swing.JFrame {
     
     private void n_orden(String n){
         this.tf_orden.setText(n);
+        orden=n;
     }
     private void llevar(){
         this.rb_llevar.add(rd_no);
@@ -888,6 +1255,7 @@ public class Dashboard extends javax.swing.JFrame {
     
     //guardar orden
     private void guardarOrden(){
+        
         cod_orden x = new cod_orden();
         x.setCliente(tf_cliente.getText());
         x.setIdUsuario(usuario.getId());
@@ -904,7 +1272,9 @@ public class Dashboard extends javax.swing.JFrame {
             cod_orden.guardar2(x, (DefaultTableModel) tb_detalleOrden.getModel());
         }
         
+        bitacoraOrden(1);
     }
+    
     
     
     /************************************************************************
@@ -915,11 +1285,12 @@ public class Dashboard extends javax.swing.JFrame {
         tb_dashboard.setModel(cod_Dashboard.llenarTabla());
         activarMenu(true);
         this.jtitulo.setText("Dashboard");
+        ventana = "Dashboard";
     }
     
     /***********************************************************************
      *                     Modficiar orden
-    */
+    ************************************************************************/
     
     private void traerOrden(int row){
         mesas();
@@ -941,23 +1312,30 @@ public class Dashboard extends javax.swing.JFrame {
         }else{
             rd_si.setSelected(true);
         }
-        
-        
+    
     }
     
-    /*
-                    Cobrar
-    */
-    private void Cobrar_panel(String orden){
-        cardLayout.show(panel3, "Cobrar");
-        activarMenu(false);
-        this.jtitulo.setText("Cobrar orden #"+orden);
+    private void guardarOrdenModif(){
+        
+        cod_orden x = new cod_orden();
+        
+        x.setCliente(tf_cliente.getText());
+        x.setTotal(tf_total.getText());
+        
+        if (rd_no.isSelected()==true) {
+            x.setLlevar("0");
+            x.setIdMesa(cbx_mesa.getSelectedItem().toString());
+            
+            
+        }else {
+            x.setLlevar("1");     
+        }
+        
+        cod_orden.guardaOrdenModif(x, prodEliminados, tf_orden.getText(), (DefaultTableModel) tb_detalleOrden.getModel());
+        
+        bitacoraOrden(2);
+        Dashboard();
     }
-    
-    
-    
-    
-    
     
     
     
@@ -966,11 +1344,107 @@ public class Dashboard extends javax.swing.JFrame {
     
     
     /**************************************************************************
+                                         Cobrar
+    **************************************************************************/
+    private void Cobrar_panel(String orden){
+        cardLayout.show(panel3, "Cobrar");
+        activarMenu(false);
+        this.jtitulo.setText("Cobrar orden #"+orden);
+        jl_cobrarTitulo.setText("Orden #"+orden);
+        
+        jl_Corden.setText(orden);
+        tf_Ccliente.setText(tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 2).toString());
+        tf_Ctotal.setText(tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 4).toString());
+        tf_Cmesero.setText(tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 3).toString());
+        tablaCobro(orden);
+        
+        String estado = tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 5).toString();
+        if (estado.equals("CP")) {
+            cobrada(false);
+            jl_cobrarTitulo.setText(jl_cobrarTitulo.getText() + " CANCELADA");
+            btn_cerrarOrden.setVisible(true);
+        } else{
+            btn_cerrarOrden.setVisible(false);
+            cobrada(true);
+        }
+    }
+    
+    private void tablaCobro(String orden){
+        this.tb_cobroDetalle.setModel((DefaultTableModel) cod_orden.tabla_detalleOrden(orden));
+    }
+    
+    private void cobrada(boolean a){
+        tf_cEntregado.setEnabled(a);
+        tf_cPropina.setEnabled(a);
+        btn_cCobrar.setEnabled(a);      
+    }
+    
+    private void cobrarOrden(){
+        double v = 0;
+        try {
+            v = Double.parseDouble(tf_cEntregado.getText());
+        } catch (Exception e) {
+        }
+        double t = Double.parseDouble(tf_Ctotal.getText());
+        if (v>=t) {
+           cod_orden.cobrar(jl_Corden.getText());
+            cobrada(false);
+            jl_cobrarTitulo.setText(jl_cobrarTitulo.getText() + " CANCELADA");
+            bitacoraOrden(4);
+        }
+        
+    }
+    
+    /**************************************************************************
+     *                 Agregar nuevos productos a la orden existente
+    **************************************************************************/
+    private void agregarProductos(){
+        double tt=Double.parseDouble(tf_total.getText());
+        
+        if (tt>0) {
+            cod_orden.DetalleOrdenExistente((DefaultTableModel) tb_detalleOrden.getModel(), tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 0).toString(), tt, true);
+              
+        }
+        bitacoraOrden(3);
+        Dashboard();
+    }
+    
+    
+    
+    
+    
+    
+    /*************************************************************************
+     *                  Registar bitacora
+    *************************************************************************/
+    private void registrarB(int tipo){
+            cod_bitacoras x = new cod_bitacoras();
+            x.setIdUsuario(this.usuario.getId());
+            x.setSuceso(cod_bitacoras.tipoSeceso(ventana, tipo));
+        
+            cod_bitacoras.registrarBitacora(x);   
+    }
+    
+    private void bitacoraOrden(int tipo){
+        cod_bitacoras x = new cod_bitacoras();
+            x.setIdUsuario(this.usuario.getId());
+            x.setSuceso(cod_bitacoras.sucesoOrden(orden, tipo));
+        
+            cod_bitacoras.registrarBitacora(x);
+    }
+    
+    
+    
+    
+    /**************************************************************************
                         login para cada pantalla
     **************************************************************************/  
     private void login (boolean pin, String panel, int tipo){
+        if (tb_dashboard.getSelectedRow()!= -1) {
+            orden = tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 0).toString();
+        }
         
-        if (cod_parametros.valorLogin()==true) {
+        if (loginR==true) {
             Login a = new Login(this, true);
         
             a.jl_titulo.setText("Identificarse");
@@ -989,17 +1463,20 @@ public class Dashboard extends javax.swing.JFrame {
                             case 1:
                                 jtitulo.setText("Nueva orden");
                                 nueva_orden();
+                                
+                                registrarB(1);
                                 break;
                             case 2:
                                 jtitulo.setText("Modificar Orden");
-                                modificar_orden(tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 0).toString());
+                                
+                                modificar_orden(orden);
                                 break;
                             case 3:
-                                jtitulo.setText("Agregar producto a la Orden #"+tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 0).toString());
-                                agregar_aOrden(tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 0).toString());
+                                jtitulo.setText("Agregar producto a la Orden #"+orden);
+                                agregar_aOrden(orden);
                                 break;
                             case 4:
-                                Cobrar_panel(tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 0).toString());
+                                Cobrar_panel(orden);
                                 break;
                         }
                                 
@@ -1020,12 +1497,15 @@ public class Dashboard extends javax.swing.JFrame {
                                 break;
                             case 2:
                                 jtitulo.setText("Modificar Orden");
-                                modificar_orden(tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 0).toString());
+                                modificar_orden(orden);
                                 break;
                             case 3:
-                                jtitulo.setText("Agregar producto a la Orden #"+tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 0).toString());
-                                agregar_aOrden(tb_dashboard.getValueAt(tb_dashboard.getSelectedRow(), 0).toString());
-                                break;    
+                                jtitulo.setText("Agregar producto a la Orden #"+orden);
+                                agregar_aOrden(orden);
+                                break; 
+                            case 4:
+                                Cobrar_panel(orden);
+                                break;
                         }
             activarMenu(false);
         }
@@ -1052,48 +1532,12 @@ public class Dashboard extends javax.swing.JFrame {
 
     
     
+    
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-                } catch (Exception e){
-                    
-                }
-                new Dashboard().setVisible(true);
-                
-                
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Cobrar;
@@ -1103,6 +1547,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel Orden;
     private javax.swing.JButton btn_administracion;
     private javax.swing.JButton btn_agregarProd;
+    private javax.swing.JButton btn_cCobrar;
+    private javax.swing.JButton btn_cerrarOrden;
     private javax.swing.JButton btn_cobrar;
     private javax.swing.JButton btn_dashboard;
     private javax.swing.JButton btn_eliminarfila;
@@ -1117,6 +1563,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel categorias;
     private javax.swing.JComboBox<String> cbx_mesa;
     private javax.swing.JPanel detalle_orden;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -1124,20 +1571,33 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jl_Corden;
+    private javax.swing.JLabel jl_cobrarTitulo;
+    private javax.swing.JLabel jl_usuario;
     private javax.swing.JLabel jtitulo;
-    private javax.swing.JLabel lbUsuario;
     private javax.swing.JList<String> list_categoria;
     private javax.swing.JPanel panel3;
     private javax.swing.JPanel panel_botones;
@@ -1145,9 +1605,16 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.ButtonGroup rb_llevar;
     private javax.swing.JRadioButton rd_no;
     private javax.swing.JRadioButton rd_si;
+    private javax.swing.JTable tb_cobroDetalle;
     private javax.swing.JTable tb_dashboard;
     private javax.swing.JTable tb_detalleOrden;
     private javax.swing.JTable tb_productos;
+    private javax.swing.JTextField tf_Ccliente;
+    private javax.swing.JTextField tf_Cmesero;
+    private javax.swing.JTextField tf_Ctotal;
+    private javax.swing.JFormattedTextField tf_Cvuelto;
+    private javax.swing.JFormattedTextField tf_cEntregado;
+    private javax.swing.JFormattedTextField tf_cPropina;
     private javax.swing.JTextField tf_cliente;
     private javax.swing.JTextField tf_mesero;
     private javax.swing.JTextField tf_orden;

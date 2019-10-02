@@ -4,6 +4,7 @@ import codigo.Conexion;
 import codigo.cod_parametros;
 import codigo.cod_usuario;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import ventanas.Dashboard;
 
 
@@ -14,7 +15,7 @@ import ventanas.Dashboard;
 public class Login extends javax.swing.JDialog {
 
     private int modo=1;
-    public int dash=1;
+    public int dash=1; //el dashboard
     
 
    
@@ -136,6 +137,14 @@ public class Login extends javax.swing.JDialog {
         jl2.setText("Clave:");
 
         tf_clave.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tf_clave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tf_claveKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_claveKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -225,7 +234,7 @@ public class Login extends javax.swing.JDialog {
         
         if (x.isEstado()==true) {
             if (dash==3) {
-                Dashboard a = new  Dashboard();
+                Dashboard a = new  Dashboard(cod_parametros.valorLogin(), x);
                 a.setVisible(true);
             }
             dispose();
@@ -250,6 +259,25 @@ public class Login extends javax.swing.JDialog {
         // TODO add your handling code here:
         limpiar();
     }//GEN-LAST:event_tf_loginMouseClicked
+
+    private void tf_claveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_claveKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      
+            bt_entrar.doClick();
+        }
+    }//GEN-LAST:event_tf_claveKeyPressed
+
+    
+    
+    //limite para establecer limit de caracteres
+    private void tf_claveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_claveKeyTyped
+        // TODO add your handling code here:
+        
+        if (tf_clave.getPassword().length == 5 && modo == 2) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tf_claveKeyTyped
 
     
     

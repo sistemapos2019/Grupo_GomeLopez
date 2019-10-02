@@ -58,8 +58,9 @@ public class Administracion extends javax.swing.JFrame {
     private void initComponents() {
 
         titulo = new javax.swing.JPanel();
-        jtitilo = new javax.swing.JLabel();
+        jtitulo = new javax.swing.JLabel();
         jl_usuario = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         panel_botones = new javax.swing.JPanel();
         btn_inicio = new javax.swing.JButton();
         btn_productos = new javax.swing.JButton();
@@ -206,34 +207,54 @@ public class Administracion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administracion");
+        setMinimumSize(new java.awt.Dimension(1366, 768));
 
         titulo.setBackground(new java.awt.Color(179, 25, 18));
 
-        jtitilo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jtitilo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jtitilo.setText("Administracion");
+        jtitulo.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jtitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jtitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jtitulo.setText("Administracion");
 
+        jl_usuario.setBackground(new java.awt.Color(255, 255, 255));
+        jl_usuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jl_usuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jl_usuario.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jl_usuario.setText("Usuario");
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/usuario.png"))); // NOI18N
+        jLabel1.setToolTipText("salir");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout tituloLayout = new javax.swing.GroupLayout(titulo);
         titulo.setLayout(tituloLayout);
         tituloLayout.setHorizontalGroup(
             tituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tituloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jtitilo, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(208, 208, 208)
+                .addComponent(jtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jl_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         tituloLayout.setVerticalGroup(
             tituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tituloLayout.createSequentialGroup()
+            .addGroup(tituloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(tituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtitilo, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                .addGroup(tituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -2679,6 +2700,14 @@ public class Administracion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbtn_p_loginItemStateChanged
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1MouseEntered
+
     private void rango_fecha(boolean x){
         this.fecha_1.setVisible(x);
             this.fecha_2.setVisible(x);
@@ -2857,6 +2886,19 @@ public class Administracion extends javax.swing.JFrame {
 }
     
     
+    /*
+        Botonees menu
+    */
+    private void activarMenu(boolean a){
+        btn_productos.setEnabled(a);
+        btn_parametros.setEnabled(a);
+        btn_mesas.setEnabled(a);
+        btn_categorias.setEnabled(a);
+        btn_compras.setEnabled(a);
+        btn_bitacoras.setEnabled(a);
+        btn_usuarios.setEnabled(a);
+    }
+    
     
     
     
@@ -2938,6 +2980,7 @@ public class Administracion extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser fecha_2;
     private javax.swing.JPanel inicio;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -3018,7 +3061,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JLabel jl_usuario;
     private javax.swing.JSpinner js_p_TMxP;
     private javax.swing.JSpinner js_p_TMxR;
-    private javax.swing.JLabel jtitilo;
+    private javax.swing.JLabel jtitulo;
     private javax.swing.JPanel panel3;
     private javax.swing.JPanel panel_Parametro;
     private javax.swing.JPanel panel_botones;

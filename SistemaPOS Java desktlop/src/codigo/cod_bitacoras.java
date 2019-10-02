@@ -73,6 +73,7 @@ public class cod_bitacoras {
         Conexion.ejecutar(q2+q3);
     }
     
+    
     public static String tipoSeceso(String desc, int tipo){
         String x="";
         
@@ -92,6 +93,33 @@ public class cod_bitacoras {
             case 4:
                 x = "Elimino un registo en "+desc;
                 return x;
+        }
+        
+        return x;
+    }
+    
+    //suceso para orden, enviar el numero de orden
+    public static String sucesoOrden(String desc, int tipo){
+        String x="";
+        
+        switch (tipo) {
+            case 1:
+                x = "Creo la orden #"+desc;
+                return x;   
+            case 2:
+                x = "Modifico la orden #"+desc;
+                return x;
+            case 3:
+                x = "Agrego o elimno productos a la orden#"+desc;
+                return x;
+                
+            case 4:
+                x = "Cobro la orden #"+desc;
+                return x;
+            case 5:
+                x = "Cerro la orden #"+desc;
+                return x;
+                
         }
         
         return x;

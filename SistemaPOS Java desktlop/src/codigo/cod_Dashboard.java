@@ -30,4 +30,21 @@ public class cod_Dashboard {
         return Conexion.llenar_tabla(q, modelo);
     }
     
+    public static DefaultTableModel DashboardLlevar(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Orden #");
+        modelo.addColumn("Mesero");
+        modelo.addColumn("cliente");
+        modelo.addColumn("Total");
+        modelo.addColumn("Estado");
+        modelo.addColumn("Tiempo Preparado");
+        modelo.addColumn("Preprarado");
+        
+        
+        
+      String q= "SELECT IdOrden, Mesero, Cliente, Total, Estado, TiempoPreparado, Preparado FROM dashboardllevar";
+        
+        return Conexion.llenar_tabla(q, modelo);
+    }
+    
 }

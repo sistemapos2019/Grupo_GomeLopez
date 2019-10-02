@@ -338,8 +338,8 @@ public class Dashboard extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         //Ordenes_llevar a = new Ordenes_llevar();
-        ventanas.Dashboard a = new ventanas.Dashboard();
-        a.setVisible(true);
+        /*ventanas.Dashboard a = new ventanas.Dashboard();
+        a.setVisible(true);*/
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
