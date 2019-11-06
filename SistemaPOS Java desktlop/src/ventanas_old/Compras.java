@@ -273,10 +273,7 @@ public class Compras extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField21ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        Administracion a = new Administracion();
-        a.setVisible(true);
-        dispose();
+       
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**

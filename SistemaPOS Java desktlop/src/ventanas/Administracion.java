@@ -24,28 +24,32 @@ import popup.parametro;
 import popup.producto;
 import popup.usuario;
 
-
 /**
  *
  * @author Miguel
  */
 public class Administracion extends javax.swing.JFrame {
 
+    private cod_usuario usuario = new cod_usuario(); //usuario logeado
+    private boolean modoPin = true; //para que solo se pida el pin para logearse
 
     CardLayout cardLayout, prmtro;
     TableRowSorter trs = new TableRowSorter();
-    private Conexion user = new Conexion();
+    private Conexion user = new Conexion(); //usuario logeado
+    private boolean loginR; //valor para si se requerira login en cada pantalla
     private String ventana = "";
     private boolean ventanaParametro = true; //false muestra tabla
-    
-    public Administracion() {
+
+    public Administracion(cod_usuario u, boolean loginR) {
         initComponents();
         inicio();
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
-        cardLayout = (CardLayout)(this.panel3.getLayout());
-        prmtro = (CardLayout)(this.panel_Parametro.getLayout());
-        
+        cardLayout = (CardLayout) (this.panel3.getLayout());
+        prmtro = (CardLayout) (this.panel_Parametro.getLayout());
+        this.usuario = u;
+        this.loginR = loginR;
+
     }
 
     /**
@@ -1868,214 +1872,83 @@ public class Administracion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void btn_productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_productosActionPerformed
-        // TODO add your handling code here:
-        if (cod_parametros.valorLogin()==true) {
-            Login a = new Login(this, true);
-        
-        a.jl_titulo.setText("Identificarse");
-        a.setLocationRelativeTo(null);
-        a.setVisible(true);
-        
-        boolean lg=false;
-        
-        a.addWindowListener(new WindowAdapter(){
-            @Override
-            public void windowClosed(WindowEvent e){
-                user = a.comprobar();
-                if (user.isA()==true) {
-                    
-                    cardLayout.show(panel3, "Productos");
-                    tabla_productos();
-                    jl_usuario.setText(user.getNombre());
-                    ventana = "producto";
-                    registrarB(1);
-                }
-            }
-            
-        });
-        } else {
-            cardLayout.show(panel3, "Productos");
-            tabla_productos();
-        }
-        
-        
-        
-        
+        login(modoPin, "Productos", 1);
     }//GEN-LAST:event_btn_productosActionPerformed
 
     private void btn_categoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_categoriasActionPerformed
-        
-        if (cod_parametros.valorLogin()==true) {
-            Login a = new Login(this, true);
-        
-            a.jl_titulo.setText("Identificarse");
-            a.setLocationRelativeTo(null);
-            a.modoPin(true);
-            a.setVisible(true);
-
-            boolean lg=false;
-
-            a.addWindowListener(new WindowAdapter(){
-                @Override
-                public void windowClosed(WindowEvent e){
-                    user = a.comprobar();
-                    if (user.isA()==true) {
-                        cardLayout.show(panel3, "Categorias");
-                        tabla_categorias();
-                        jl_usuario.setText(user.getNombre());
-                        ventana = "categoria";
-                        registrarB(1);
-                    }
-                }
-
-            });
-        } else {
-            cardLayout.show(panel3, "Categorias");
-            tabla_categorias();
-        }
-        
-        
-        
-        //this.jtitilo.setText("Nueva orden");
-        
+        login(modoPin, "Categorias", 2);
     }//GEN-LAST:event_btn_categoriasActionPerformed
-  
-    
+
     private void btn_mesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mesasActionPerformed
-        //
-        if (cod_parametros.valorLogin()==true) {
-            Login a = new Login(this, true);
-        
-            a.jl_titulo.setText("Identificarse");
-            a.setLocationRelativeTo(null);
-            a.modoPin(false);
-            a.setVisible(true);
-
-            a.addWindowListener(new WindowAdapter(){
-                @Override
-                public void windowClosed(WindowEvent e){
-                    user = a.comprobar();
-                    if (user.isA()==true) {
-                        cardLayout.show(panel3, "Mesas");
-                        tabla_mesas();
-                        
-                        jl_usuario.setText(user.getNombre());
-                        ventana = "mesas";
-                        registrarB(1);
-                    }
-                }
-
-            });
-        } else {
-            cardLayout.show(panel3, "Mesas");
-            tabla_mesas();
-            
-        }
-        
+        login(modoPin, "Mesas", 3);
     }//GEN-LAST:event_btn_mesasActionPerformed
 
     private void btn_comprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_comprasActionPerformed
-        // COMPRAS
-        if (cod_parametros.valorLogin()==true) {
-            Login a = new Login(this, true);
-        
-            a.jl_titulo.setText("Identificarse");
-            a.setLocationRelativeTo(null);
-            a.modoPin(false);
-            a.setVisible(true);
-
-            a.addWindowListener(new WindowAdapter(){
-                @Override
-                public void windowClosed(WindowEvent e){
-                    user = a.comprobar();
-                    if (user.isA()==true) {
-                        cardLayout.show(panel3, "Compras");
-                        
-                        jl_usuario.setText(user.getNombre());
-                        ventana = "compras";
-                        registrarB(1);
-                    }
-                }
-
-            });
-        } else {
-            cardLayout.show(panel3, "Compras");
-        }
-        
-        
+        login(modoPin, "Compras", 4);
     }//GEN-LAST:event_btn_comprasActionPerformed
 
     private void btn_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosActionPerformed
-        // USUARIO
-        if (cod_parametros.valorLogin()==true) {
-            Login a = new Login(this, true);
-        
-            a.jl_titulo.setText("Identificarse");
-            a.setLocationRelativeTo(null);
-            a.modoPin(false);
-            a.setVisible(true);
-
-            a.addWindowListener(new WindowAdapter(){
-                @Override
-                public void windowClosed(WindowEvent e){
-                    user = a.comprobar();
-                    if (user.isA()==true) {
-                        cardLayout.show(panel3, "Usuarios");
-                        tabla_usuarios();
-                        
-                        jl_usuario.setText(user.getNombre());
-                        ventana = "usuarios";
-                        registrarB(1);
-                    }
-                }
-
-            });
-        } else {
-            cardLayout.show(panel3, "Usuarios");
-            tabla_usuarios();
-            
-        }
-        
+        login(modoPin, "Usuarios", 5);
     }//GEN-LAST:event_btn_usuariosActionPerformed
 
     private void btn_parametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_parametrosActionPerformed
-        //PARAMETRO
-        if (cod_parametros.valorLogin()==true) {
-            Login a = new Login(this, true);
-        
-            a.jl_titulo.setText("Identificarse");
-            a.setLocationRelativeTo(null);
-            a.modoPin(false);
-            a.setVisible(true);
-
-            a.addWindowListener(new WindowAdapter(){
-                @Override
-                public void windowClosed(WindowEvent e){
-                    user = a.comprobar();
-                    if (user.isA()==true) {
-                        cardLayout.show(panel3, "Parametros");
-                        tabla_parametros();
-                        llenarParametro();
-                        activo_parametro(false);
-
-                        jl_usuario.setText(user.getNombre());
-                        ventana = "parametros";
-                        registrarB(1);
-                    }
-                }
-
-            });
-        } else {
-            cardLayout.show(panel3, "Parametros");
-            tabla_parametros(); 
-            llenarParametro();
-            activo_parametro(false);
-               
-        }
+        login(modoPin, "Parametros" , 6);
     }//GEN-LAST:event_btn_parametrosActionPerformed
 
+    
+    /*****************************************************************
+    *           Inicio de cada panel
+    *******************************************************************/
+    
+    private void mostrarProductos() {
+        tabla_productos();
+        jl_usuario.setText(usuario.getNombre());
+        ventana = "producto";
+    }
+
+    private void mostrarCategorias() {
+        tabla_categorias();
+        jl_usuario.setText(usuario.getNombre());
+        ventana = "categoria";
+    }
+
+    private void mostrarMesas() {
+        tabla_mesas();
+        jl_usuario.setText(usuario.getNombre());
+        ventana = "mesas";
+    }
+
+    private void mostrarCompras() {
+        jl_usuario.setText(usuario.getNombre());
+        ventana = "compras";
+    }
+
+    private void mostrarUsuarios() {
+        tabla_usuarios();
+        jl_usuario.setText(usuario.getNombre());
+        ventana = "usuarios";
+    }
+
+    private void mostrarParametros() {
+        tabla_parametros();
+        llenarParametro();
+        activo_parametro(false);
+
+        jl_usuario.setText(usuario.getNombre());
+        ventana = "parametros";
+    }
+    
+    private void mostrarBitacoras(){
+        rango_fecha(false);
+        tabla_bitacoras();
+
+        jl_usuario.setText(usuario.getNombre());
+        ventana = "bitacoras";
+    }
+
+    
     
     
     //***************************************************************************
@@ -2087,23 +1960,23 @@ public class Administracion extends javax.swing.JFrame {
         a.mesa_id();
         a.jl_mesa.setText("Agregar nueva mesa");
         a.setVisible(true);
-        
-        a.addWindowListener(new WindowAdapter(){
+
+        a.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosed(WindowEvent e){
-                if (a.exito==true) {
+            public void windowClosed(WindowEvent e) {
+                if (a.exito == true) {
                     registrarB(2);
                 }
                 tabla_mesas();
             }
-            
+
         });
-        
+
     }//GEN-LAST:event_btn_Mesa_nuevoActionPerformed
 
     //MESA MODIFICAR
     private void bt_mesa_modActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_mesa_modActionPerformed
-        
+
         if (this.tb_mesas.getSelectedRow() != -1) {
             mesas a = new mesas(this, true);
             String id = this.tb_mesas.getValueAt(tb_mesas.getSelectedRow(), 0).toString();
@@ -2112,26 +1985,24 @@ public class Administracion extends javax.swing.JFrame {
             a.m = false;
             a.jl_mesa.setText("Modificar mesa");
             a.setVisible(true);
-            
-            
-            a.addWindowListener(new WindowAdapter(){
-            @Override
-            public void windowClosed(WindowEvent e){
-                if (a.exito==true) {
-                    registrarB(3);
+
+            a.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (a.exito == true) {
+                        registrarB(3);
+                    }
+                    tabla_mesas();
                 }
-                tabla_mesas();
-            }
-            
-        });
-            
+
+            });
+
         }
-        
-        
+
+
     }//GEN-LAST:event_bt_mesa_modActionPerformed
 
-    
-    
+
     private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField20ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField20ActionPerformed
@@ -2142,40 +2013,10 @@ public class Administracion extends javax.swing.JFrame {
 
     private void btn_bitacorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bitacorasActionPerformed
         // BITACORAS
-        
-        
-        if (cod_parametros.valorLogin()==true) {
-            Login a = new Login(this, true);
-        
-            a.jl_titulo.setText("Identificarse");
-            a.setLocationRelativeTo(null);
-            a.modoPin(false);
-            a.setVisible(true);
-
-            a.addWindowListener(new WindowAdapter(){
-                @Override
-                public void windowClosed(WindowEvent e){
-                    user = a.comprobar();
-                    if (user.isA()==true) {
-                        cardLayout.show(panel3, "Bitacoras");
-                        rango_fecha(false);
-                        tabla_bitacoras();
-                        
-                        jl_usuario.setText(user.getNombre());
-                        ventana = "parametros";
-                        registrarB(1);
-                    }
-                }
-
-            });
-        } else {
-            cardLayout.show(panel3, "Bitacoras");
-            rango_fecha(false);
-            tabla_bitacoras();   
-        }
-       
+        login(modoPin, "Bitacoras", 7);
     }//GEN-LAST:event_btn_bitacorasActionPerformed
 
+    
     
     //*************************************************************************
     //                      mesa eliminar - buscar
@@ -2183,54 +2024,50 @@ public class Administracion extends javax.swing.JFrame {
     private void bt_mesa_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_mesa_eliminarActionPerformed
         // TODO add your handling code here:
         if (this.tb_mesas.getSelectedRow() != -1) {
-            
+
             int test = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion");
 
-                if (test==0) {
-                    String id = this.tb_mesas.getValueAt(tb_mesas.getSelectedRow(), 0).toString();
-                    cod_mesas.eliminar(id);
-                    this.tabla_mesas();
+            if (test == 0) {
+                String id = this.tb_mesas.getValueAt(tb_mesas.getSelectedRow(), 0).toString();
+                cod_mesas.eliminar(id);
+                this.tabla_mesas();
 
-                    registrarB(4);
-     
-                }              
+                registrarB(4);
+
+            }
         }
-        
+
     }//GEN-LAST:event_bt_mesa_eliminarActionPerformed
 
     private void tf_buscar_mesasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscar_mesasKeyTyped
         // TODO add your handling code here:
         trs = new TableRowSorter(this.tb_mesas.getModel());
-        
-        tf_buscar_mesas.addKeyListener(new KeyAdapter(){
+
+        tf_buscar_mesas.addKeyListener(new KeyAdapter() {
             @Override
-            
-            public void keyReleased (KeyEvent ke){
-                trs.setRowFilter(RowFilter.regexFilter("(?i)"+tf_buscar_mesas.getText(), 1));
+
+            public void keyReleased(KeyEvent ke) {
+                trs.setRowFilter(RowFilter.regexFilter("(?i)" + tf_buscar_mesas.getText(), 1));
             }
         });
-        
+
         this.tb_mesas.setRowSorter(trs);
-        
+
     }//GEN-LAST:event_tf_buscar_mesasKeyTyped
 
-    
-    
-    
-    
-    /*********************************************************************
-                              CATEGORIA
-    **********************************************************************/
-    
-    
+    /**
+     * *******************************************************************
+     * CATEGORIA
+     * ********************************************************************
+     */
     //***ELIMINAR CATEGORIA
     private void bt_categ_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_categ_eliminarActionPerformed
         // 
         if (this.tb_categorias.getSelectedRow() != -1) {
-            
+
             int test = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion");
 
-            if (test==0) {
+            if (test == 0) {
                 String id = this.tb_categorias.getValueAt(tb_categorias.getSelectedRow(), 0).toString();
                 cod_categorias.eliminar(id);
 
@@ -2239,12 +2076,11 @@ public class Administracion extends javax.swing.JFrame {
                 this.tabla_categorias();
 
             }
-       
+
         }
-        
+
     }//GEN-LAST:event_bt_categ_eliminarActionPerformed
 
-    
     //*****MODIFICAR CATEGORIA
     private void bt_categ_modfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_categ_modfActionPerformed
         //
@@ -2256,23 +2092,21 @@ public class Administracion extends javax.swing.JFrame {
             a.m = false;
             a.jl_titulo.setText("Modificar categoria");
             a.setVisible(true);
-            
-            
-            a.addWindowListener(new WindowAdapter(){
-            @Override
-            public void windowClosed(WindowEvent e){
-                if (a.exito==true) {
-                    registrarB(3);
+
+            a.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (a.exito == true) {
+                        registrarB(3);
+                    }
+                    tabla_categorias();
                 }
-                tabla_categorias();
-            }
-            
-        });
-            
+
+            });
+
         }
     }//GEN-LAST:event_bt_categ_modfActionPerformed
 
-    
     //******AGREGAR CATEGORIA NUEVA********
     private void btn_categ_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_categ_nuevoActionPerformed
         // 
@@ -2280,66 +2114,58 @@ public class Administracion extends javax.swing.JFrame {
         a.categoria_id();
         a.jl_titulo.setText("Agregar nueva categoria");
         a.setVisible(true);
-        
-        a.addWindowListener(new WindowAdapter(){
+
+        a.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosed(WindowEvent e){
-                if (a.exito==true) {
+            public void windowClosed(WindowEvent e) {
+                if (a.exito == true) {
                     registrarB(2);
                 }
-                
+
                 tabla_categorias();
             }
-            
+
         });
     }//GEN-LAST:event_btn_categ_nuevoActionPerformed
 
-    
     //BUSCAR EN TABLA CATEGORIAS
     private void tf_categoriasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_categoriasKeyTyped
         // 
         trs = new TableRowSorter(this.tb_categorias.getModel());
-        
-        tf_categorias.addKeyListener(new KeyAdapter(){
+
+        tf_categorias.addKeyListener(new KeyAdapter() {
             @Override
-            
-            public void keyReleased (KeyEvent ke){
-                trs.setRowFilter(RowFilter.regexFilter("(?i)"+tf_categorias.getText(), 1));
+
+            public void keyReleased(KeyEvent ke) {
+                trs.setRowFilter(RowFilter.regexFilter("(?i)" + tf_categorias.getText(), 1));
             }
         });
-        
+
         this.tb_categorias.setRowSorter(trs);
     }//GEN-LAST:event_tf_categoriasKeyTyped
 
-    
-    
-    
-    
-    
     //***********************************************************************
     //                       BOTONES PRODUCTOS
     //***********************************************************************
-    
     //*** ELIMINAR
     private void bt_prod_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_prod_eliminarActionPerformed
-        
-            if (this.tb_productos.getSelectedRow() != -1) {
-            
+
+        if (this.tb_productos.getSelectedRow() != -1) {
+
             int test = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion");
 
-                if (test==0) {
-                    String id = this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 0).toString();
-                    cod_productos.eliminar(id);
+            if (test == 0) {
+                String id = this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 0).toString();
+                cod_productos.eliminar(id);
 
-                    registrarB(4);
+                registrarB(4);
 
-                    this.tabla_productos();
-                }
-            
+                this.tabla_productos();
+            }
+
         }
     }//GEN-LAST:event_bt_prod_eliminarActionPerformed
 
-    
     //*********MODIFICAR PRODUCTO********************
     private void bt_prod_modifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_prod_modifActionPerformed
         // 
@@ -2348,31 +2174,29 @@ public class Administracion extends javax.swing.JFrame {
             cod_productos x = new cod_productos();
             x.setId(this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 0).toString());
             x.setNombre(this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 1).toString());
-            x.setPrecio( this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 2).toString() );
-            x.setInventario( this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 3).toString() );
-            x.setPreparado( this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 4).toString() );
-            x.setCategoria( this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 5).toString() );
-            
+            x.setPrecio(this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 2).toString());
+            x.setInventario(this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 3).toString());
+            x.setPreparado(this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 4).toString());
+            x.setCategoria(this.tb_productos.getValueAt(tb_productos.getSelectedRow(), 5).toString());
+
             a.producto(x);
             a.m = false;
             a.jl_titulo.setText("Modificar producto");
             a.setVisible(true);
-            
-            
-            a.addWindowListener(new WindowAdapter(){
-            @Override
-            public void windowClosed(WindowEvent e){
-                if (a.exito==true) {
-                    registrarB(3);
+
+            a.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (a.exito == true) {
+                        registrarB(3);
+                    }
+                    tabla_productos();
                 }
-                tabla_productos();
-            }
-            
-        });
+
+            });
         }
     }//GEN-LAST:event_bt_prod_modifActionPerformed
 
-    
     //******AGREGAR NUEVO PRODUCTO
     private void btn_prod_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_prod_nuevoActionPerformed
         // 
@@ -2380,71 +2204,65 @@ public class Administracion extends javax.swing.JFrame {
         a.producto_id();
         a.jl_titulo.setText("Agregar nuevo producto");
         a.setVisible(true);
-        
-        a.addWindowListener(new WindowAdapter(){
+
+        a.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosed(WindowEvent e){
-                if (a.exito==true) {
+            public void windowClosed(WindowEvent e) {
+                if (a.exito == true) {
                     registrarB(2);
                 }
                 tabla_productos();
             }
-            
+
         });
     }//GEN-LAST:event_btn_prod_nuevoActionPerformed
 
     private void tf_productoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_productoKeyTyped
         // 
         trs = new TableRowSorter(this.tb_productos.getModel());
-        
-                
-        
-        tf_producto.addKeyListener(new KeyAdapter(){
+
+        tf_producto.addKeyListener(new KeyAdapter() {
             @Override
-            
-            public void keyReleased (KeyEvent ke){
-                
-            if (cbx_productos.getSelectedIndex()==0) {
-                trs.setRowFilter(RowFilter.regexFilter("(?i)"+tf_producto.getText(), 0,1,2,3,4,5 ));
-            } else {
-                trs.setRowFilter(RowFilter.regexFilter("(?i)"+tf_producto.getText(), cbx_productos.getSelectedIndex()-1 ));
-            }
-                
-                
-                
+
+            public void keyReleased(KeyEvent ke) {
+
+                if (cbx_productos.getSelectedIndex() == 0) {
+                    trs.setRowFilter(RowFilter.regexFilter("(?i)" + tf_producto.getText(), 0, 1, 2, 3, 4, 5));
+                } else {
+                    trs.setRowFilter(RowFilter.regexFilter("(?i)" + tf_producto.getText(), cbx_productos.getSelectedIndex() - 1));
+                }
+
             }
         });
-        
+
         this.tb_productos.setRowSorter(trs);
     }//GEN-LAST:event_tf_productoKeyTyped
 
     private void cbx_productosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_productosItemStateChanged
         this.tf_producto.setText("");
-        
+
     }//GEN-LAST:event_cbx_productosItemStateChanged
 
-    
-    
-    
-    
-    /************************************************************************
-     *                              USUARIO
-    *************************************************************************/
-    
+    /**
+     * **********************************************************************
+     * USUARIO
+     * ***********************************************************************
+     */
+
     private void btn_usuario_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuario_eliminarActionPerformed
         //
         if (this.tb_usuarios.getSelectedRow() != -1) {
-            
+
             int test = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion");
 
-                if (test==0) {
-                    String id = this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 0).toString();
-                    cod_usuario.eliminar(id);
+            if (test == 0) {
+                String id = this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 0).toString();
+                cod_usuario.eliminar(id);
 
-                    registrarB(4);
+                registrarB(4);
 
-                    this.tabla_usuarios();
-                } 
+                this.tabla_usuarios();
+            }
         }
     }//GEN-LAST:event_btn_usuario_eliminarActionPerformed
 
@@ -2454,30 +2272,29 @@ public class Administracion extends javax.swing.JFrame {
         if (this.tb_usuarios.getSelectedRow() != -1) {
             usuario a = new usuario(this, true);
             cod_usuario x = new cod_usuario();
-            
-            x.setId (this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 0).toString());
+
+            x.setId(this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 0).toString());
             x.setNombre(this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 1).toString());
-            x.setLogin(this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 2).toString() );
-            x.setClave(this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 3).toString() );
-            x.setPin(this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 4).toString() );
-            x.setRol(this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 5).toString() );
-            
+            x.setLogin(this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 2).toString());
+            x.setClave(this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 3).toString());
+            x.setPin(this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 4).toString());
+            x.setRol(this.tb_usuarios.getValueAt(tb_usuarios.getSelectedRow(), 5).toString());
+
             a.usuario(x);
             a.m = false;
             a.jl_titulo.setText("Modificar usuario");
             a.setVisible(true);
-            
-            
-            a.addWindowListener(new WindowAdapter(){
-            @Override
-            public void windowClosed(WindowEvent e){
-                if (a.exito==true) {
-                    registrarB(3);
+
+            a.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (a.exito == true) {
+                        registrarB(3);
+                    }
+                    tabla_usuarios();
                 }
-                tabla_usuarios();
-            }
-            
-        });
+
+            });
         }
     }//GEN-LAST:event_btn_usuario_modfActionPerformed
 
@@ -2488,16 +2305,16 @@ public class Administracion extends javax.swing.JFrame {
         a.usuario_id();
         a.jl_titulo.setText("Agregar nuevo usuario");
         a.setVisible(true);
-        
-        a.addWindowListener(new WindowAdapter(){
+
+        a.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosed(WindowEvent e){
-                if (a.exito==true) {
+            public void windowClosed(WindowEvent e) {
+                if (a.exito == true) {
                     registrarB(2);
                 }
                 tabla_usuarios();
             }
-            
+
         });
     }//GEN-LAST:event_btn_usuario_agregarActionPerformed
 
@@ -2505,30 +2322,24 @@ public class Administracion extends javax.swing.JFrame {
     private void tf_usuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_usuarioKeyTyped
         //
         trs = new TableRowSorter(this.tb_usuarios.getModel());
-     
-        tf_usuario.addKeyListener(new KeyAdapter(){
+
+        tf_usuario.addKeyListener(new KeyAdapter() {
             @Override
-            
-            public void keyReleased (KeyEvent ke){
-                
-            if (cbx_usuario.getSelectedIndex()==0) {
-                trs.setRowFilter(RowFilter.regexFilter("(?i)"+tf_usuario.getText(), 0,1,2,3,4,5 ));
-            } else {
-                trs.setRowFilter(RowFilter.regexFilter("(?i)"+tf_usuario.getText(), cbx_usuario.getSelectedIndex()-1 ));
-            }
-     
+
+            public void keyReleased(KeyEvent ke) {
+
+                if (cbx_usuario.getSelectedIndex() == 0) {
+                    trs.setRowFilter(RowFilter.regexFilter("(?i)" + tf_usuario.getText(), 0, 1, 2, 3, 4, 5));
+                } else {
+                    trs.setRowFilter(RowFilter.regexFilter("(?i)" + tf_usuario.getText(), cbx_usuario.getSelectedIndex() - 1));
+                }
+
             }
         });
-        
+
         this.tb_usuarios.setRowSorter(trs);
     }//GEN-LAST:event_tf_usuarioKeyTyped
 
-    
-    
-    
-    
-        
-     
 
     private void btn_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inicioActionPerformed
         //
@@ -2557,32 +2368,32 @@ public class Administracion extends javax.swing.JFrame {
     //**************************************************************************
     //                           BITACORAS
     //**************************************************************************
-    
+
     private void btn_mostrar_bitacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mostrar_bitacActionPerformed
         //
-        switch (this.cbx_bitacora.getSelectedIndex()){
+        switch (this.cbx_bitacora.getSelectedIndex()) {
             case 0:
-            tabla_bitacoras();
-            break;
+                tabla_bitacoras();
+                break;
             case 1:
-            /*if (fecha1.getDate()!=null & fecha2.getDate()!=null) {
+                /*if (fecha1.getDate()!=null & fecha2.getDate()!=null) {
 
             }*/
-            java.util.Date desde = fecha_1.getDate();
-            java.util.Date hasta = fecha_2.getDate();
+                java.util.Date desde = fecha_1.getDate();
+                java.util.Date hasta = fecha_2.getDate();
 
-            if (desde ==null || hasta == null){
-                JOptionPane.showMessageDialog(this, "Error en las fechas");
-            } else {
-                long d = desde.getTime();
-                long h = hasta.getTime();
-                java.sql.Date dsd = new java.sql.Date(d);
-                java.sql.Date hst = new java.sql.Date(h);
+                if (desde == null || hasta == null) {
+                    JOptionPane.showMessageDialog(this, "Error en las fechas");
+                } else {
+                    long d = desde.getTime();
+                    long h = hasta.getTime();
+                    java.sql.Date dsd = new java.sql.Date(d);
+                    java.sql.Date hst = new java.sql.Date(h);
 
-                this.tb_bitacoras.setModel(cod_bitacoras.llenar_tablaRango(dsd, hst));
-            }
+                    this.tb_bitacoras.setModel(cod_bitacoras.llenar_tablaRango(dsd, hst));
+                }
 
-            break;
+                break;
 
         }
 
@@ -2590,7 +2401,7 @@ public class Administracion extends javax.swing.JFrame {
 
     private void cbx_bitacoraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_bitacoraItemStateChanged
         // TODO add your handling code here:
-        if (this.cbx_bitacora.getSelectedIndex()==1) {
+        if (this.cbx_bitacora.getSelectedIndex() == 1) {
             rango_fecha(true);
         } else {
             rango_fecha(false);
@@ -2601,14 +2412,14 @@ public class Administracion extends javax.swing.JFrame {
     private void btn_parametrosEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_parametrosEditarActionPerformed
         this.guardarParametro();
         if (btn_parametrosEditar.getText().equals("Editar")) {
-           this.activo_parametro(true);
-           btn_parametrosEditar.setText("Guardar");
-        }else {
-           this.guardarParametro();
-           this.activo_parametro(false);
-           btn_parametrosEditar.setText("Editar");
+            this.activo_parametro(true);
+            btn_parametrosEditar.setText("Guardar");
+        } else {
+            this.guardarParametro();
+            this.activo_parametro(false);
+            btn_parametrosEditar.setText("Editar");
         }
-        
+
     }//GEN-LAST:event_btn_parametrosEditarActionPerformed
 
     private void btn_usuario_modf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuario_modf1ActionPerformed
@@ -2617,18 +2428,18 @@ public class Administracion extends javax.swing.JFrame {
             parametro a = new parametro(this, true);
             cod_parametros x = new cod_parametros();
 
-            x.setId (this.tb_parametros.getValueAt(tb_parametros.getSelectedRow(), 0).toString());
+            x.setId(this.tb_parametros.getValueAt(tb_parametros.getSelectedRow(), 0).toString());
             x.setNombre(this.tb_parametros.getValueAt(tb_parametros.getSelectedRow(), 1).toString());
-            x.setValor(this.tb_parametros.getValueAt(tb_parametros.getSelectedRow(), 2).toString() );
+            x.setValor(this.tb_parametros.getValueAt(tb_parametros.getSelectedRow(), 2).toString());
 
             a.parametro(x);
 
             a.jl_titulo.setText("Modificar parametro");
             a.setVisible(true);
 
-            a.addWindowListener(new WindowAdapter(){
+            a.addWindowListener(new WindowAdapter() {
                 @Override
-                public void windowClosed(WindowEvent e){
+                public void windowClosed(WindowEvent e) {
                     tabla_parametros();
                 }
 
@@ -2636,20 +2447,20 @@ public class Administracion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_usuario_modf1ActionPerformed
 
-    
+
     private void tf_parametroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_parametroKeyTyped
         //
         trs = new TableRowSorter(this.tb_parametros.getModel());
 
-        tf_parametro.addKeyListener(new KeyAdapter(){
+        tf_parametro.addKeyListener(new KeyAdapter() {
             @Override
 
-            public void keyReleased (KeyEvent ke){
+            public void keyReleased(KeyEvent ke) {
 
-                if (cbx_parametro.getSelectedIndex()==0) {
-                    trs.setRowFilter(RowFilter.regexFilter("(?i)"+tf_parametro.getText(), 0,1,2 ));
+                if (cbx_parametro.getSelectedIndex() == 0) {
+                    trs.setRowFilter(RowFilter.regexFilter("(?i)" + tf_parametro.getText(), 0, 1, 2));
                 } else {
-                    trs.setRowFilter(RowFilter.regexFilter("(?i)"+tf_parametro.getText(), cbx_parametro.getSelectedIndex()-1 ));
+                    trs.setRowFilter(RowFilter.regexFilter("(?i)" + tf_parametro.getText(), cbx_parametro.getSelectedIndex() - 1));
                 }
 
             }
@@ -2660,42 +2471,42 @@ public class Administracion extends javax.swing.JFrame {
 
     private void btn_Parametro_mostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Parametro_mostarActionPerformed
         // TODO add your handling code here:
-        if (this.ventanaParametro==true) {
+        if (this.ventanaParametro == true) {
             prmtro.show(panel_Parametro, "tabla");
             tabla_parametros();
-            ventanaParametro=false;
+            ventanaParametro = false;
             btn_Parametro_mostar.setText("Modo Facil");
         } else {
             prmtro.show(panel_Parametro, "modoFacil");
             llenarParametro();
-            ventanaParametro=true;
+            ventanaParametro = true;
             btn_Parametro_mostar.setText("Modo Tabla");
         }
-        
+
     }//GEN-LAST:event_btn_Parametro_mostarActionPerformed
 
     private void tbtn_p_TkPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tbtn_p_TkPItemStateChanged
-        if (tbtn_p_TkP.isSelected() ) {
+        if (tbtn_p_TkP.isSelected()) {
             tbtn_p_TkP.setText("ON");
-        }else {
+        } else {
             tbtn_p_TkP.setText("OFF");
         }
     }//GEN-LAST:event_tbtn_p_TkPItemStateChanged
 
     private void tbtn_p_tkNPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tbtn_p_tkNPItemStateChanged
         //
-        if (tbtn_p_tkNP.isSelected() ) {
+        if (tbtn_p_tkNP.isSelected()) {
             tbtn_p_tkNP.setText("ON");
-        }else {
+        } else {
             tbtn_p_tkNP.setText("OFF");
         }
     }//GEN-LAST:event_tbtn_p_tkNPItemStateChanged
 
     private void tbtn_p_loginItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tbtn_p_loginItemStateChanged
         //
-        if (tbtn_p_login.isSelected() ) {
+        if (tbtn_p_login.isSelected()) {
             tbtn_p_login.setText("ON");
-        }else {
+        } else {
             tbtn_p_login.setText("OFF");
         }
     }//GEN-LAST:event_tbtn_p_loginItemStateChanged
@@ -2708,85 +2519,80 @@ public class Administracion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel1MouseEntered
 
-    private void rango_fecha(boolean x){
+    private void rango_fecha(boolean x) {
         this.fecha_1.setVisible(x);
-            this.fecha_2.setVisible(x);
-            this.jl_fecha1.setVisible(x);
-            this.jl_fecha2.setVisible(x);
+        this.fecha_2.setVisible(x);
+        this.jl_fecha1.setVisible(x);
+        this.jl_fecha2.setVisible(x);
     }
-    
-    
-    
+
     //**********************************************************************
     //                      LLENADO DE TABLAS
     //**********************************************************************
-    
     public void tabla_categorias() {
-       this.tb_categorias.setModel(cod_categorias.llenar_tablaC());     
-}
-    
-    public void tabla_productos(){
+        this.tb_categorias.setModel(cod_categorias.llenar_tablaC());
+    }
+
+    public void tabla_productos() {
         this.tb_productos.setModel(cod_productos.llenar_tablaP());
-   }
-    
-    public void tabla_mesas() {   
-       this.tb_mesas.setModel(cod_mesas.llenar_tabla());     
-}
-    
+    }
+
+    public void tabla_mesas() {
+        this.tb_mesas.setModel(cod_mesas.llenar_tabla());
+    }
+
     public void tabla_parametros() {
-       this.tb_parametros.setModel(cod_parametros.llenar_tabla());     
-}
-    
-    public void tabla_usuarios(){
+        this.tb_parametros.setModel(cod_parametros.llenar_tabla());
+    }
+
+    public void tabla_usuarios() {
         this.tb_usuarios.setModel(cod_usuario.llenar_tabla());
     }
-    
-    public void tabla_bitacoras(){
+
+    public void tabla_bitacoras() {
         this.tb_bitacoras.setModel(cod_bitacoras.llenar_tabla());
     }
-    
-    
-    public void inicio(){
-        
+
+    public void inicio() {
+
         cod_parametros x = new cod_parametros();
-        x=cod_parametros.inicio();
-        
+        x = cod_parametros.inicio();
+
         this.jl_nombreRestaurante.setText(x.getNombreR());
         this.jl_direccion.setText(x.getDirecc());
         this.jl_telefono.setText(x.getTelef());
         user = null;
         ventana = "";
         this.jl_usuario.setText("");
+        activarMenu(true);
     }
-    
-    
-    
+
     //***********************************************************************
     //                      Registrar bitacora
     //**********************************************************************
-    
-    private void registrarB(int tipo){
-        if (cod_parametros.valorLogin()==true) {
+    private void registrarB(int tipo) {
+        if (cod_parametros.valorLogin() == true) {
             cod_bitacoras x = new cod_bitacoras();
-            x.setIdUsuario(this.user.getId());
+            x.setIdUsuario(this.usuario.getId());
             x.setSuceso(cod_bitacoras.tipoSeceso(ventana, tipo));
-        
+
             cod_bitacoras.registrarBitacora(x);
         }
-        
+
     }
-    
-    /***************************************************************************
-     *                           PARAMETROS
-    ***************************************************************************/
-    
-    public void llenarParametro(){
+
+    /**
+     * *************************************************************************
+     * PARAMETROS
+     * *************************************************************************
+     */
+    public void llenarParametro() {
         this.tf_p_nmbr.setText(Conexion.valorId("2"));
         this.tf_p_desc.setText(Conexion.valorId("3"));
         this.tf_p_telf.setText(Conexion.valorId("4"));
         this.tf_p_nit.setText(Conexion.valorId("5"));
         this.tf_p_dirc.setText(Conexion.valorId("7"));
-        
+
         if (Conexion.valorId("8").equals("1")) {
             this.tbtn_p_TkP.setSelected(true);
         } else {
@@ -2794,102 +2600,96 @@ public class Administracion extends javax.swing.JFrame {
         }
         if (Conexion.valorId("9").equals("1")) {
             this.tbtn_p_tkNP.setSelected(true);
-            
+
         } else {
             this.tbtn_p_tkNP.setSelected(false);
         }
-        
+
         this.js_p_TMxR.setValue(Double.parseDouble(Conexion.valorId("10")));
         this.js_p_TMxP.setValue(Double.parseDouble(Conexion.valorId("11")));
-        
+
         if (Conexion.valorId("12").equals("1")) {
             this.tbtn_p_login.setSelected(true);
-            
+
         } else {
             this.tbtn_p_login.setSelected(false);
         }
     }
-    
-    public void activo_parametro(boolean a){
+
+    public void activo_parametro(boolean a) {
         this.tf_p_nmbr.setEditable(a);
         this.tf_p_desc.setEditable(a);
         this.tf_p_telf.setEditable(a);
         this.tf_p_nit.setEditable(a);
         this.tf_p_dirc.setEditable(a);
-        
+
         this.tbtn_p_TkP.setEnabled(a);
 
         this.tbtn_p_tkNP.setEnabled(a);
 
-        
         this.js_p_TMxR.setEnabled(a);
         this.js_p_TMxP.setEnabled(a);
 
         this.tbtn_p_login.setEnabled(a);
 
     }
-    
+
     //obtener los valores de parametros para guardar
-    private void guardarParametro(){
+    private void guardarParametro() {
         cod_parametros p = new cod_parametros();
         ArrayList<cod_parametros> x = new ArrayList<cod_parametros>();
-        
-        
-        String v = tf_p_nmbr.getText();
-        x.add(new cod_parametros("2", v) );
-        
-        v = tf_p_desc.getText();
-        x.add(new cod_parametros("3", v) );
-        
-        v =(tf_p_telf.getText());
-        x.add(new cod_parametros("4", v) );
-        
-        v= (tf_p_nit.getText());
-        x.add(new cod_parametros("5", v) );
-        
-        v= (tf_p_dirc.getText());
-        x.add(new cod_parametros("7", v) );
-        
-        
-        if (tbtn_p_TkP.isSelected()==true) {
-            v="1";
-        } else {
-            v="0";
-        }      
-        x.add(new cod_parametros("8", v) );
-        
-        
-        if (tbtn_p_tkNP.isSelected()==true) {
-            v=("1");
-        } else {
-            v=("0");
-        }      
-        x.add(new cod_parametros("9", v) );
 
-    
-        v = (js_p_TMxR.getValue().toString());
-        x.add(new cod_parametros("10", v) );
-        
-        v=(js_p_TMxP.getValue().toString());
-        x.add(new cod_parametros("11", v) );
-        
-        p.setId("12");
-        if (tbtn_p_login.isSelected()==true) {
-            v=("1");
+        String v = tf_p_nmbr.getText();
+        x.add(new cod_parametros("2", v));
+
+        v = tf_p_desc.getText();
+        x.add(new cod_parametros("3", v));
+
+        v = (tf_p_telf.getText());
+        x.add(new cod_parametros("4", v));
+
+        v = (tf_p_nit.getText());
+        x.add(new cod_parametros("5", v));
+
+        v = (tf_p_dirc.getText());
+        x.add(new cod_parametros("7", v));
+
+        if (tbtn_p_TkP.isSelected() == true) {
+            v = "1";
         } else {
-            v=("0");
-        }      
-        x.add(new cod_parametros("12", v) );
-        
+            v = "0";
+        }
+        x.add(new cod_parametros("8", v));
+
+        if (tbtn_p_tkNP.isSelected() == true) {
+            v = ("1");
+        } else {
+            v = ("0");
+        }
+        x.add(new cod_parametros("9", v));
+
+        v = (js_p_TMxR.getValue().toString());
+        x.add(new cod_parametros("10", v));
+
+        v = (js_p_TMxP.getValue().toString());
+        x.add(new cod_parametros("11", v));
+
+        p.setId("12");
+        if (tbtn_p_login.isSelected() == true) {
+            v = ("1");
+        } else {
+            v = ("0");
+        }
+        x.add(new cod_parametros("12", v));
+
         cod_parametros.modicarParametros(x);
         llenarParametro();
-}
-    
-    
+    }
+
     /*
         Botonees menu
-    */
-    private void activarMenu(boolean a){
+     */
+    private void activarMenu(boolean a) {
         btn_productos.setEnabled(a);
         btn_parametros.setEnabled(a);
         btn_mesas.setEnabled(a);
@@ -2898,45 +2698,91 @@ public class Administracion extends javax.swing.JFrame {
         btn_bitacoras.setEnabled(a);
         btn_usuarios.setEnabled(a);
     }
-    
-    
-    
-    
-    
+
     /**
-     * @param args the command line arguments
+     * ************************************************************************
+     * login para cada pantalla
+     * ************************************************************************
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void login(boolean pin, String panel, int tipo) {
+
+        if (loginR == true) {
+            Login a = new Login(this, true);
+
+            //a.jl_titulo.setText("Identificarse");
+            a.setLocationRelativeTo(null);
+            a.modoPin(pin);
+            a.setVisible(true);
+
+            a.addWindowListener(new WindowAdapter() {
+                @Override
+
+                public void windowClosed(WindowEvent e) {
+                    usuario = a.Comprobar();
+                    if (usuario.isEstado() == true) {
+                        cardLayout.show(panel3, panel);
+                        switch (tipo) {
+                            case 1:
+                                mostrarProductos();
+                                break;
+                            case 2:
+                                mostrarCategorias();
+                                break;
+                            case 3:
+                                mostrarMesas();
+                                break;
+                            case 4:
+                                mostrarCompras();
+                                break;
+                            case 5:
+                                mostrarUsuarios();
+                                break;
+                            case 6:
+                                mostrarParametros();
+                                break;
+                            case 7:
+                                mostrarBitacoras();
+                                break;
+                        }
+
+                        registrarB(1);
+                        activarMenu(true);
+                    }
+
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Administracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Administracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Administracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Administracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+            );
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Administracion().setVisible(true);
+        } else {
+            cardLayout.show(panel3, panel);
+            switch (tipo) {
+                case 1:
+                    mostrarProductos();
+                    break;
+                case 2:
+                    mostrarCategorias();
+                    break;
+                case 3:
+                    mostrarMesas();
+                    break;
+                case 4:
+                    mostrarCompras();
+                    break;
+                case 5:
+                    mostrarUsuarios();
+                    break;
+                case 6:
+                    mostrarParametros();
+                    break;
+                case 7:
+                    mostrarBitacoras();
+                    break;
             }
-        });
+            activarMenu(true);
+        }
+
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Bitacoras;

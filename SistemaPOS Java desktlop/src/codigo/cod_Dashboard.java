@@ -13,19 +13,17 @@ public class cod_Dashboard {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Orden #");
         modelo.addColumn("Mesa");
-        modelo.addColumn("cliente");
+        modelo.addColumn("Cliente");
         modelo.addColumn("Mesero");
         modelo.addColumn("Total");
         modelo.addColumn("Estado");
-        modelo.addColumn("LLevar");
         modelo.addColumn("Tiempo Preparado");
-        modelo.addColumn("Preprarado");
         modelo.addColumn("Tiempo Rapido");
-        modelo.addColumn("Rapido");
+        modelo.addColumn("Tipo");
         
         
         
-        String q= "SELECT IdOrden, Mesa, Cliente, Mesero, Total, Estado, Llevar, TiempoPreparado, Preparado, TiempoRapido, Rapido FROM dashboardprincipal";
+        String q= "SELECT IdOrden, Mesa, Cliente, Mesero, Total, Estado, TiempoPreparado, TiempoRapido, tipo FROM dashboardprincipal2";
         
         return Conexion.llenar_tabla(q, modelo);
     }

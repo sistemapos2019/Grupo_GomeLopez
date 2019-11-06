@@ -215,10 +215,7 @@ public class Contable_ventas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        Administracion a = new Administracion();
-        a.setVisible(true);
-        dispose();
+       
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**

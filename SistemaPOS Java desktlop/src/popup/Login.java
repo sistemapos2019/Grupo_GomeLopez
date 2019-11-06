@@ -137,6 +137,11 @@ public class Login extends javax.swing.JDialog {
         jl2.setText("Clave:");
 
         tf_clave.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tf_clave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_claveActionPerformed(evt);
+            }
+        });
         tf_clave.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tf_claveKeyPressed(evt);
@@ -278,6 +283,10 @@ public class Login extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_tf_claveKeyTyped
+
+    private void tf_claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_claveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_claveActionPerformed
 
     
     

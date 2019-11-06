@@ -28,7 +28,7 @@ public class Inicio {
         Login a =  new Login(null, false);
 
         
-            a.jl_titulo.setText("Identificarse");
+            //a.jl_titulo.setText("Identificarse");
             a.setLocationRelativeTo(null);
             a.modoPin(false);
             a.dash=3;
@@ -41,7 +41,7 @@ public class Inicio {
         Login a =  new Login(null, false);
 
         
-            a.jl_titulo.setText("Identificarse");
+            //a.jl_titulo.setText("Identificarse");
             a.setLocationRelativeTo(null);
             a.modoPin(false);
             a.dash=3;

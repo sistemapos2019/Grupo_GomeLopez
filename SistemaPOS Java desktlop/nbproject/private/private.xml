@@ -4,12 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Miguel/Documents/proyecto/SistemaPOS%202%20java/SistemaPOS%20Java%20desktlop/src/ventanas/Dashboard.java</file>
-            <file>file:/C:/Users/Miguel/Documents/proyecto/SistemaPOS%202%20java/SistemaPOS%20Java%20desktlop/src/codigo/cod_orden.java</file>
+            <file>file:/C:/Users/Miguel/Documents/proyecto/SistemaPOS%202%20java/SistemaPOS%20Java%20desktlop/src/codigo/cod_Dashboard.java</file>
             <file>file:/C:/Users/Miguel/Documents/proyecto/SistemaPOS%202%20java/SistemaPOS%20Java%20desktlop/src/ventanas/Estadisticas.java</file>
+            <file>file:/C:/Users/Miguel/Documents/proyecto/SistemaPOS%202%20java/SistemaPOS%20Java%20desktlop/src/Render/renderDashboard.java</file>
             <file>file:/C:/Users/Miguel/Documents/proyecto/SistemaPOS%202%20java/SistemaPOS%20Java%20desktlop/src/codigo/Conexion.java</file>
+            <file>file:/C:/Users/Miguel/Documents/proyecto/SistemaPOS%202%20java/SistemaPOS%20Java%20desktlop/src/ventanas/Administracion.java</file>
             <file>file:/C:/Users/Miguel/Documents/proyecto/SistemaPOS%202%20java/SistemaPOS%20Java%20desktlop/src/codigo/cod_bitacoras.java</file>
-            <file>file:/C:/Users/Miguel/Documents/proyecto/SistemaPOS%202%20java/SistemaPOS%20Java%20desktlop/src/ventanas/Inicio.java</file>
-            <file>file:/C:/Users/Miguel/Documents/proyecto/SistemaPOS%202%20java/SistemaPOS%20Java%20desktlop/src/popup/Login.java</file>
         </group>
     </open-files>
 </project-private>
