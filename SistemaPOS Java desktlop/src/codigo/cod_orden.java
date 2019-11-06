@@ -74,13 +74,13 @@ public class cod_orden {
     
     
     public static DefaultTableModel detalleOrden(int x, DefaultTableModel modelo, DefaultTableModel md){
-        String p = modelo.getValueAt(x, 0).toString();
+        String p = modelo.getValueAt(x, 0).toString(); //nombre del producto
         int fila = buscarProductoTabla(p, md);
         
         DefaultTableModel modeloPoducto = new DefaultTableModel();
         modeloPoducto = md;
         
-        Object[] prod = new Object[4];
+        Object[] prod = new Object[5];
         
         
         if (fila == -1) {
@@ -88,6 +88,7 @@ public class cod_orden {
             prod[1]=modelo.getValueAt(x, 1);
             prod[2]="1";
             prod[3]=modelo.getValueAt(x, 1);
+            prod[4]=modelo.getValueAt(x, 2);
             modeloPoducto.addRow(prod);    
        
         } else {
@@ -147,6 +148,7 @@ public class cod_orden {
         modelo.addColumn("Precio");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Sub Total");
+        modelo.addColumn("Prep.");
         return modelo;
     }
     
@@ -172,17 +174,18 @@ public class cod_orden {
         x.setIdMesa(Integer.toString(Conexion.id("SELECT id FROM mesa WHERE mesa='"+x.getIdMesa() +"'")));
         
         
-        String q1 = "INSERT INTO orden  (id, idMesa, idUsuario, cliente, estado, total, llevar) VALUES ('";
-        String q2 = x.getId() +"', '"+ x.getIdMesa() +"', '"+ x.getIdUsuario() +"', '"+ x.getCliente() +"', '"+ x.getEstado() +"', '"+x.getTotal() +"', '"+x.llevar +"') ";
+        String q1 = "INSERT INTO orden  (id, idMesa, idUsuario, cliente, estado, total, llevar, observacion) VALUES ('";
+        String q2 = x.getId() +"', '"+ x.getIdMesa() +"', '"+ x.getIdUsuario() +"', '"+ x.getCliente() +"', '"+ x.getEstado() +"', '"+x.getTotal() +"', '"+x.llevar +"', '"+x.observacion +"') ";
         //System.out.println(q1+q2);
         Conexion.ejecutar(q1+q2);
         guardarDetalle(md, x.getId());
     }
     
+    //
     public static void guardar2(cod_orden x, DefaultTableModel md){
 
-        String q1 = "INSERT INTO orden  (id, idUsuario, cliente, estado, total, llevar) VALUES ('";
-        String q2 = x.getId() +"', '"+ x.getIdUsuario() +"', '"+ x.getCliente() +"', '"+ x.getEstado() +"', '"+x.getTotal() +"', '"+x.llevar +"') ";
+        String q1 = "INSERT INTO orden  (id, idUsuario, cliente, estado, total, llevar, observacion) VALUES ('";
+        String q2 = x.getId() +"', '"+ x.getIdUsuario() +"', '"+ x.getCliente() +"', '"+ x.getEstado() +"', '"+x.getTotal() +"', '"+x.llevar +"', '"+x.observacion +"') ";
         //System.out.println(q1+q2);
         Conexion.ejecutar(q1+q2);
         guardarDetalle(md, x.getId());
@@ -347,11 +350,11 @@ public class cod_orden {
         eliminarProductos(prodEli, orden);
         String q1;
         if (x.getLlevar().equals("1")) {
-            q1 = "UPDATE orden SET llevar='1', idMesa=NULL, cliente='"+ x.getCliente() +"', total='"+ t +"' WHERE id='"+ orden +"'" ;
+            q1 = "UPDATE orden SET llevar='1', idMesa=NULL, cliente='"+ x.getCliente() +"', total='"+ t +"', observacion=' "+x.getObservacion()+"' WHERE id='"+ orden +"'" ;
             Conexion.ejecutar(q1);
         }else{
             x.setIdMesa(Integer.toString(Conexion.id("SELECT id FROM mesa WHERE mesa='"+x.getIdMesa() +"'")));
-            q1 = "UPDATE orden SET llevar='0', idMesa='"+ x.getIdMesa() +"', cliente='"+ x.getCliente() +"', total='"+ t +"' WHERE id='"+ orden +"'" ;
+            q1 = "UPDATE orden SET llevar='0', idMesa='"+ x.getIdMesa() +"', cliente='"+ x.getCliente() +"', total='"+ t +"', observacion=' "+x.getObservacion()+"' WHERE id='"+ orden +"'" ;
             Conexion.ejecutar(q1);
         }
         
@@ -411,6 +414,13 @@ public class cod_orden {
         Conexion.ejecutar(q);
     }
     
+    
+    //obtener observacion
+    public static String observacion(String orden){
+        String q = "SELECT observacion FROM orden WHERE id='"+ orden +"'";
+        
+        return Conexion.obtnerRegitro(q);
+    }
     
     
     //constructor  -- set & get

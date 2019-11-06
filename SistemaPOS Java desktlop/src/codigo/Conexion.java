@@ -354,8 +354,9 @@ public class Conexion {
         return env;
     }
     
+    
     /*
-            obtener el un valor especifico
+        *********obtener el un valor especifico************
     */
     public static String obtnerRegitro(String q){
         resultado = obtenerValores(q);
@@ -369,6 +370,38 @@ public class Conexion {
         cierraConexion();
         return nombre;
     }
+    
+    
+    
+    //No sirve creo.. necesita revisarse
+    public static cod_orden orden(String n){
+        cod_orden orden=null;
+        String q = "SELECT * FROM orden WHERE id='"+ n +"'";
+        resultado = obtenerValores(q);
+        try {
+            while (resultado.next()) {
+                orden.setId(resultado.getString(0));
+                orden.setIdMesa(resultado.getString(1));
+                orden.setIdUsuario(resultado.getString(2));
+                orden.setFecha(resultado.getString(3));
+                orden.setLlevar(resultado.getString(4));
+                orden.setEstado(resultado.getString(5));
+                orden.setObservacion(resultado.getString(6));
+                orden.setTotal(resultado.getString(9));
+                orden.setPropina(resultado.getString(10));
+                orden.setFormaPago(resultado.getString(11));
+                orden.setCliente(resultado.getString(12));
+                return orden;
+            }
+            
+        } catch (Exception e) {
+        }
+        cierraConexion();
+        return orden;
+    }
+    
+    
+    
     
     //***************************
     // para el login

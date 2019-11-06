@@ -2,10 +2,12 @@
 package ventanas;
 
 import Render.renderDashboard;
+import codigo.Conexion;
 import codigo.cod_Dashboard;
 import codigo.cod_bitacoras;
 import codigo.cod_orden;
 import codigo.cod_usuario;
+import com.itextpdf.text.DocumentException;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -14,7 +16,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.RowFilter;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -116,7 +121,7 @@ public class Dashboard extends javax.swing.JFrame {
         rd_no = new javax.swing.JRadioButton();
         rd_si = new javax.swing.JRadioButton();
         jLabel22 = new javax.swing.JLabel();
-        tf_cliente1 = new javax.swing.JTextField();
+        tf_observacion = new javax.swing.JTextField();
         categorias = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -162,6 +167,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_cerrarOrden = new javax.swing.JButton();
         Imprimir = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -493,10 +499,10 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel22.setText("Observacion:");
 
-        tf_cliente1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tf_cliente1.addActionListener(new java.awt.event.ActionListener() {
+        tf_observacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tf_observacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_cliente1ActionPerformed(evt);
+                tf_observacionActionPerformed(evt);
             }
         });
 
@@ -532,7 +538,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(tf_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 9, Short.MAX_VALUE))
                     .addGroup(N_ordenLayout.createSequentialGroup()
-                        .addComponent(tf_cliente1)
+                        .addComponent(tf_observacion)
                         .addContainerGap())))
         );
         N_ordenLayout.setVerticalGroup(
@@ -559,7 +565,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(N_ordenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(tf_cliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_observacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1031,6 +1037,13 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel2.setText("Aqui ira la de imprimir");
 
+        jButton2.setText("imprimir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ImprimirLayout = new javax.swing.GroupLayout(Imprimir);
         Imprimir.setLayout(ImprimirLayout);
         ImprimirLayout.setHorizontalGroup(
@@ -1039,13 +1052,19 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(396, 396, 396)
                 .addComponent(jLabel2)
                 .addContainerGap(633, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImprimirLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(256, 256, 256))
         );
         ImprimirLayout.setVerticalGroup(
             ImprimirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ImprimirLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(jLabel2)
-                .addContainerGap(595, Short.MAX_VALUE))
+                .addGap(137, 137, 137)
+                .addComponent(jButton2)
+                .addContainerGap(433, Short.MAX_VALUE))
         );
 
         panel3.add(Imprimir, "Imprimir");
@@ -1079,7 +1098,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel3, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                    .addComponent(panel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -1330,9 +1349,13 @@ public class Dashboard extends javax.swing.JFrame {
         tf_lector.setBackground(Color.red);
     }//GEN-LAST:event_tf_lectorFocusLost
 
-    private void tf_cliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cliente1ActionPerformed
+    private void tf_observacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_observacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_cliente1ActionPerformed
+    }//GEN-LAST:event_tf_observacionActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     
     
@@ -1345,9 +1368,10 @@ public class Dashboard extends javax.swing.JFrame {
         lista_Categoria();
         mesas();
         tabla_detalle();
+        tf_cliente.setText("");
+        tf_observacion.setText("");
         n_orden(cod_orden.ordenId());
-        tf_mesero.setText(usuario.getNombre());
-        
+        tf_mesero.setText(usuario.getNombre());    
     }
     private void modificar_orden(String orden){
         panelesOrden(true, false, false, true);
@@ -1386,6 +1410,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
     
     
+    
     //metodos para visualizar los paneles de ordenes
     private void panelesOrden(boolean titulo, boolean categoria, boolean producto, boolean detalle){
         this.N_orden.setVisible(titulo);
@@ -1406,6 +1431,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
     
     
+    
     //guardar orden
     private void guardarOrden(){
         
@@ -1415,6 +1441,7 @@ public class Dashboard extends javax.swing.JFrame {
         x.setId(tf_orden.getText());
         x.setTotal(tf_total.getText());
         x.setEstado("AA");
+        x.setObservacion(tf_observacion.getText());
         
         if (rd_no.isSelected()==true) {
             x.setLlevar("0");
@@ -1424,8 +1451,17 @@ public class Dashboard extends javax.swing.JFrame {
             x.setLlevar("1");
             cod_orden.guardar2(x, (DefaultTableModel) tb_detalleOrden.getModel());
         }
-        
+        imprimirTicket(x.getId());
         bitacoraOrden(1);
+    }
+    
+    private void imprimirTicket(String orden){
+        try {
+            ticket.cocina.pdf_coc((DefaultTableModel) tb_detalleOrden.getModel(), orden);
+            ticket.cocina.pdf_prep((DefaultTableModel) tb_detalleOrden.getModel(), orden);
+        } catch (DocumentException | FileNotFoundException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
@@ -1467,6 +1503,7 @@ public class Dashboard extends javax.swing.JFrame {
         tf_mesero.setText(tb_dashboard.getValueAt(row, 3).toString());
         tf_orden.setText(orden);
         tf_total.setText(tb_dashboard.getValueAt(row, 4).toString());
+        tf_observacion.setText(cod_orden.observacion(orden));
 
         String x = tb_dashboard.getValueAt(row, 8).toString();
 
@@ -1485,6 +1522,7 @@ public class Dashboard extends javax.swing.JFrame {
         
         x.setCliente(tf_cliente.getText());
         x.setTotal(tf_total.getText());
+        x.setObservacion(tf_observacion.getText());
         
         if (rd_no.isSelected()==true) {
             x.setLlevar("0");
@@ -1738,6 +1776,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel detalle_orden;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1792,9 +1831,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tf_cEntregado;
     private javax.swing.JFormattedTextField tf_cPropina;
     private javax.swing.JTextField tf_cliente;
-    private javax.swing.JTextField tf_cliente1;
     private javax.swing.JTextField tf_lector;
     private javax.swing.JTextField tf_mesero;
+    private javax.swing.JTextField tf_observacion;
     private javax.swing.JTextField tf_orden;
     private javax.swing.JTextField tf_total;
     private javax.swing.JPanel titulo;
