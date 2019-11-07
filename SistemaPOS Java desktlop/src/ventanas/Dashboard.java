@@ -1158,8 +1158,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btn_estadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estadisticasActionPerformed
         // TODO add your handling code here:
-        Estadisticas a = new Estadisticas();
-        a.setVisible(true);
+      
     }//GEN-LAST:event_btn_estadisticasActionPerformed
 
     private void btn_administracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_administracionActionPerformed
