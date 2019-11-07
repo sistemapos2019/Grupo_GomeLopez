@@ -1,10 +1,21 @@
 package codigo;
 
+import com.itextpdf.text.DocumentException;
+import com.qoppa.pdf.PDFException;
+import com.qoppa.pdf.PDFPermissionException;
+import java.awt.print.PrinterException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.print.PrintException;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
+import ticket.tickets;
+import ventanas.Dashboard;
 
 /**
  *
@@ -170,6 +181,8 @@ public class cod_orden {
         return Integer.toString(a);
     }
     
+    
+    
     public static void guardar(cod_orden x, DefaultTableModel md){
         x.setIdMesa(Integer.toString(Conexion.id("SELECT id FROM mesa WHERE mesa='"+x.getIdMesa() +"'")));
         
@@ -179,6 +192,7 @@ public class cod_orden {
         //System.out.println(q1+q2);
         Conexion.ejecutar(q1+q2);
         guardarDetalle(md, x.getId());
+        
     }
     
     //
@@ -421,6 +435,56 @@ public class cod_orden {
         
         return Conexion.obtnerRegitro(q);
     }
+    
+    
+    //
+       private static void TicketCoc(String orden, DefaultTableModel md) throws PrintException, PDFException, PrinterException, PDFPermissionException, IOException{
+        try {
+            ticket.tickets.pdf_coc(md, orden);
+            
+        } catch (DocumentException | FileNotFoundException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private static void TicketNPre(String orden, DefaultTableModel md) throws PrintException, PDFException, PrinterException, PDFPermissionException, IOException{
+        try {
+            ticket.tickets.pdf_Nprep( md, orden);
+            
+        } catch (DocumentException | FileNotFoundException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
+    
+    public static void ticketsGenerar(String orden, DefaultTableModel md){
+        
+        if (Conexion.valorId("8").equals("1")) {
+            try {
+                TicketCoc(orden, md);
+                tickets.printPDF("cocina.pdf");
+            } catch (PrintException | PDFException | PrinterException | IOException ex) {
+                Logger.getLogger(cod_orden.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (Conexion.valorId("9").equals("1")) {
+            
+            try {
+                TicketNPre(orden, md);
+                tickets.printPDF("NoPreparacion.pdf");
+            } catch (PrintException | PDFException | PrinterException | IOException ex) {
+                Logger.getLogger(cod_orden.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
     //constructor  -- set & get

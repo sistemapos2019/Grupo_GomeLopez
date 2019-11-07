@@ -8,6 +8,8 @@ import codigo.cod_bitacoras;
 import codigo.cod_orden;
 import codigo.cod_usuario;
 import com.itextpdf.text.DocumentException;
+import com.qoppa.pdf.PDFException;
+import com.qoppa.pdf.PDFPermissionException;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -16,10 +18,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.print.PrinterException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.PrintException;
 import javax.swing.RowFilter;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -41,6 +46,7 @@ public class Dashboard extends javax.swing.JFrame {
     private final ArrayList<String> prodEliminados = new ArrayList<>();
     private String orden;
     private final boolean modoPin = true; //para que solo se pida el pin para logearse
+    
     private Timer timer = new Timer (10000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1229,7 +1235,9 @@ public class Dashboard extends javax.swing.JFrame {
         switch (tOrden){
             case 1:
                 if (validarOrden()==true) {
+
                     this.guardarOrden();
+
                     Dashboard();
                 }
                 break;
@@ -1433,7 +1441,7 @@ public class Dashboard extends javax.swing.JFrame {
     
     
     //guardar orden
-    private void guardarOrden(){
+    private void guardarOrden() {
         
         cod_orden x = new cod_orden();
         x.setCliente(tf_cliente.getText());
@@ -1451,18 +1459,14 @@ public class Dashboard extends javax.swing.JFrame {
             x.setLlevar("1");
             cod_orden.guardar2(x, (DefaultTableModel) tb_detalleOrden.getModel());
         }
-        imprimirTicket(x.getId());
+        cod_orden.ticketsGenerar(x.getId(), (DefaultTableModel) tb_detalleOrden.getModel());
+        
         bitacoraOrden(1);
     }
     
-    private void imprimirTicket(String orden){
-        try {
-            ticket.cocina.pdf_coc((DefaultTableModel) tb_detalleOrden.getModel(), orden);
-            ticket.cocina.pdf_prep((DefaultTableModel) tb_detalleOrden.getModel(), orden);
-        } catch (DocumentException | FileNotFoundException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
+    
+    
     
     
     
