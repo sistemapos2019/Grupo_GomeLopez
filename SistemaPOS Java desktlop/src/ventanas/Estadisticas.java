@@ -21,7 +21,7 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
         cardLayout = (CardLayout)(this.panel3.getLayout());
     }
 
-    
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,7 +49,9 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
         Dashboard = new javax.swing.JPanel();
         tf_lector = new javax.swing.JTextField();
         lb_lector = new javax.swing.JLabel();
-        tf_buscar = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         Orden = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -268,6 +270,11 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
                 tf_lectorFocusLost(evt);
             }
         });
+        tf_lector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_lectorActionPerformed(evt);
+            }
+        });
         tf_lector.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tf_lectorKeyPressed(evt);
@@ -276,18 +283,27 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
 
         lb_lector.setText("On");
 
-        tf_buscar.setText("jTextField1");
-        tf_buscar.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tf_buscarFocusLost(evt);
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton1.setText("VENTAS MENSUALES");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
-        tf_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tf_buscarKeyPressed(evt);
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton2.setText("VENTAS DIARIAS");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tf_buscarKeyTyped(evt);
+        });
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton3.setText("COMPRAS MENSUALES");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -295,10 +311,14 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
         Dashboard.setLayout(DashboardLayout);
         DashboardLayout.setHorizontalGroup(
             DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DashboardLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(tf_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 567, Short.MAX_VALUE)
+            .addGroup(DashboardLayout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(lb_lector, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tf_lector, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,12 +327,14 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
         DashboardLayout.setVerticalGroup(
             DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DashboardLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(62, 62, 62)
                 .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_lector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_lector)
-                    .addComponent(tf_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(576, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap(569, Short.MAX_VALUE))
         );
 
         panel3.add(Dashboard, "Dashboard");
@@ -391,7 +413,8 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
     }//GEN-LAST:event_btn_cobrarActionPerformed
 
     private void btn_estadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estadisticasActionPerformed
-
+    
+        
     }//GEN-LAST:event_btn_estadisticasActionPerformed
 
     private void btn_administracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_administracionActionPerformed
@@ -408,48 +431,6 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
         System.out.println(a);
     }//GEN-LAST:event_DashboardKeyPressed
 
-    private void tf_lectorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_lectorFocusLost
-        // TODO add your handling code here:
-        lb_lector.setText("Leyendo codigo");
-        tf_lector.setBackground(Color.RED);
-    }//GEN-LAST:event_tf_lectorFocusLost
-
-    private void tf_lectorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_lectorFocusGained
-        // TODO add your handling code here:
-        tf_lector.setBackground(Color.GREEN);
-        lb_lector.setText("No leyendo");
-    }//GEN-LAST:event_tf_lectorFocusGained
-
-    private void tf_buscarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_buscarFocusLost
-        // TODO add your handling code here:
-        //tf_lector.setFocusable(true);
-    }//GEN-LAST:event_tf_buscarFocusLost
-
-    private void tf_buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarKeyTyped
-        // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      
-           tf_lector.requestFocus();
-        }
-    }//GEN-LAST:event_tf_buscarKeyTyped
-
-    private void tf_lectorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_lectorKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            System.out.println(tf_lector.getText());
-            tf_lector.setText("");
-           tf_lector.setFocusable(true);
-        }
-    }//GEN-LAST:event_tf_lectorKeyPressed
-
-    private void tf_buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            tf_buscar.setText("");
-           tf_lector.requestFocus();
-        }
-    }//GEN-LAST:event_tf_buscarKeyPressed
-
     private void DashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardMouseClicked
         // TODO add your handling code here:
         tf_lector.requestFocus();
@@ -464,6 +445,55 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
             this.panel_botones.setVisible(true);
         }
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void tf_lectorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_lectorKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            System.out.println(tf_lector.getText());
+            tf_lector.setText("");
+            tf_lector.setFocusable(true);
+        }
+    }//GEN-LAST:event_tf_lectorKeyPressed
+
+    private void tf_lectorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_lectorFocusLost
+        // TODO add your handling code here:
+        lb_lector.setText("Leyendo codigo");
+        tf_lector.setBackground(Color.RED);
+    }//GEN-LAST:event_tf_lectorFocusLost
+
+    private void tf_lectorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_lectorFocusGained
+        // TODO add your handling code here:
+        tf_lector.setBackground(Color.GREEN);
+        lb_lector.setText("No leyendo");
+    }//GEN-LAST:event_tf_lectorFocusGained
+
+    private void tf_lectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_lectorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_lectorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        EstadisticasVentas a = new EstadisticasVentas();
+        
+        a.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        VentasD a = new VentasD();
+        
+        a.setVisible(true);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ComprasMensuales a = new ComprasMensuales();
+        
+        a.setVisible(true);
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     
 
@@ -535,6 +565,9 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
     private javax.swing.JButton btn_imprimir;
     private javax.swing.JButton btn_modificar;
     private javax.swing.JButton btn_orden;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jl_usuario;
@@ -542,7 +575,6 @@ public class Estadisticas extends javax.swing.JFrame implements KeyListener{
     private javax.swing.JLabel lb_lector;
     private javax.swing.JPanel panel3;
     private javax.swing.JPanel panel_botones;
-    private javax.swing.JTextField tf_buscar;
     private javax.swing.JTextField tf_lector;
     private javax.swing.JPanel titulo;
     // End of variables declaration//GEN-END:variables
