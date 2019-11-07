@@ -47,7 +47,7 @@ public class cod_parametros {
     
     public static boolean valorLogin(){
         
-        String a = Conexion.valor("Login en cada pantalla");
+        String a = Conexion.valorId("12");
         if (a.equals("1")==true) {
             return true;
         }

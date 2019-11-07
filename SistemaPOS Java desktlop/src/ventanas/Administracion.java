@@ -183,6 +183,12 @@ public class Administracion extends javax.swing.JFrame {
         tbtn_p_TkP = new javax.swing.JToggleButton();
         tbtn_p_tkNP = new javax.swing.JToggleButton();
         btn_parametrosEditar = new javax.swing.JButton();
+        jPanel19 = new javax.swing.JPanel();
+        jl_nombreRestaurante12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        js_p_propina = new javax.swing.JSpinner();
+        jPanel20 = new javax.swing.JPanel();
+        tbtn_p_entorno = new javax.swing.JToggleButton();
         tabla = new javax.swing.JPanel();
         btn_usuario_modf1 = new javax.swing.JButton();
         tf_parametro = new javax.swing.JTextField();
@@ -1437,7 +1443,7 @@ public class Administracion extends javax.swing.JFrame {
         jl_nombreRestaurante9.setText("Login requerido");
         jl_nombreRestaurante9.setFocusable(false);
 
-        tbtn_p_login.setText("OFF");
+        tbtn_p_login.setText("No");
         tbtn_p_login.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 tbtn_p_loginItemStateChanged(evt);
@@ -1453,7 +1459,7 @@ public class Administracion extends javax.swing.JFrame {
                 .addComponent(jl_nombreRestaurante9, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tbtn_p_login, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1477,14 +1483,14 @@ public class Administracion extends javax.swing.JFrame {
         jl_nombreRestaurante5.setText("Ticket para no preparados");
         jl_nombreRestaurante5.setFocusable(false);
 
-        tbtn_p_TkP.setText("OFF");
+        tbtn_p_TkP.setText("No");
         tbtn_p_TkP.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 tbtn_p_TkPItemStateChanged(evt);
             }
         });
 
-        tbtn_p_tkNP.setText("OFF");
+        tbtn_p_tkNP.setText("No");
         tbtn_p_tkNP.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 tbtn_p_tkNPItemStateChanged(evt);
@@ -1506,7 +1512,7 @@ public class Administracion extends javax.swing.JFrame {
                         .addComponent(jl_nombreRestaurante5, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tbtn_p_tkNP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel32Layout.setVerticalGroup(
             jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1533,36 +1539,111 @@ public class Administracion extends javax.swing.JFrame {
             }
         });
 
+        jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder("Propina"));
+
+        jl_nombreRestaurante12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jl_nombreRestaurante12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jl_nombreRestaurante12.setText("Propina");
+        jl_nombreRestaurante12.setFocusable(false);
+
+        jLabel11.setText("%");
+
+        js_p_propina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        js_p_propina.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+        js_p_propina.setEditor(new javax.swing.JSpinner.NumberEditor(js_p_propina, "0"));
+        js_p_propina.setName(""); // NOI18N
+        js_p_propina.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jl_nombreRestaurante12, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(js_p_propina, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(js_p_propina, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jl_nombreRestaurante12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
+
+        jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder("Modo entorno"));
+
+        tbtn_p_entorno.setText("Caja");
+        tbtn_p_entorno.setActionCommand("Caja");
+        tbtn_p_entorno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                tbtn_p_entornoItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tbtn_p_entorno, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tbtn_p_entorno, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel30Layout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
+                .addContainerGap(122, Short.MAX_VALUE)
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel30Layout.createSequentialGroup()
-                        .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel30Layout.createSequentialGroup()
+                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_parametrosEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_parametrosEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(124, Short.MAX_VALUE))
+                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel30Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_parametrosEditar)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel30Layout.createSequentialGroup()
+                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel30Layout.createSequentialGroup()
+                        .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btn_parametrosEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panel_Parametro.add(jPanel30, "modoFacil");
@@ -2487,27 +2568,27 @@ public class Administracion extends javax.swing.JFrame {
 
     private void tbtn_p_TkPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tbtn_p_TkPItemStateChanged
         if (tbtn_p_TkP.isSelected()) {
-            tbtn_p_TkP.setText("ON");
+            tbtn_p_TkP.setText("Si");
         } else {
-            tbtn_p_TkP.setText("OFF");
+            tbtn_p_TkP.setText("No");
         }
     }//GEN-LAST:event_tbtn_p_TkPItemStateChanged
 
     private void tbtn_p_tkNPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tbtn_p_tkNPItemStateChanged
         //
         if (tbtn_p_tkNP.isSelected()) {
-            tbtn_p_tkNP.setText("ON");
+            tbtn_p_tkNP.setText("Si");
         } else {
-            tbtn_p_tkNP.setText("OFF");
+            tbtn_p_tkNP.setText("No");
         }
     }//GEN-LAST:event_tbtn_p_tkNPItemStateChanged
 
     private void tbtn_p_loginItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tbtn_p_loginItemStateChanged
         //
         if (tbtn_p_login.isSelected()) {
-            tbtn_p_login.setText("ON");
+            tbtn_p_login.setText("Si");
         } else {
-            tbtn_p_login.setText("OFF");
+            tbtn_p_login.setText("No");
         }
     }//GEN-LAST:event_tbtn_p_loginItemStateChanged
 
@@ -2518,6 +2599,15 @@ public class Administracion extends javax.swing.JFrame {
     private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void tbtn_p_entornoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tbtn_p_entornoItemStateChanged
+        // 
+        if (tbtn_p_entorno.isSelected()) {
+            tbtn_p_entorno.setText("Mesa");
+        } else{
+            tbtn_p_entorno.setText("Caja");
+        }
+    }//GEN-LAST:event_tbtn_p_entornoItemStateChanged
 
     private void rango_fecha(boolean x) {
         this.fecha_1.setVisible(x);
@@ -2587,6 +2677,11 @@ public class Administracion extends javax.swing.JFrame {
      * *************************************************************************
      */
     public void llenarParametro() {
+        if (Conexion.valorId("1").equals("1")) {
+            this.tbtn_p_entorno.setSelected(true);
+        } else {
+            this.tbtn_p_entorno.setSelected(false);
+        }
         this.tf_p_nmbr.setText(Conexion.valorId("2"));
         this.tf_p_desc.setText(Conexion.valorId("3"));
         this.tf_p_telf.setText(Conexion.valorId("4"));
@@ -2607,6 +2702,7 @@ public class Administracion extends javax.swing.JFrame {
 
         this.js_p_TMxR.setValue(Double.parseDouble(Conexion.valorId("10")));
         this.js_p_TMxP.setValue(Double.parseDouble(Conexion.valorId("11")));
+        this.js_p_propina.setValue(Double.parseDouble(Conexion.valorId("13")));
 
         if (Conexion.valorId("12").equals("1")) {
             this.tbtn_p_login.setSelected(true);
@@ -2631,6 +2727,8 @@ public class Administracion extends javax.swing.JFrame {
         this.js_p_TMxP.setEnabled(a);
 
         this.tbtn_p_login.setEnabled(a);
+        this.tbtn_p_entorno.setEnabled(a);
+        this.js_p_propina.setEnabled(a);
 
     }
 
@@ -2673,6 +2771,9 @@ public class Administracion extends javax.swing.JFrame {
 
         v = (js_p_TMxP.getValue().toString());
         x.add(new cod_parametros("11", v));
+        
+        v = (js_p_propina.getValue().toString());
+        x.add(new cod_parametros("13", v));
 
         p.setId("12");
         if (tbtn_p_login.isSelected() == true) {
@@ -2681,6 +2782,16 @@ public class Administracion extends javax.swing.JFrame {
             v = ("0");
         }
         x.add(new cod_parametros("12", v));
+        
+        
+        if (tbtn_p_entorno.isSelected() == true) {
+            v = "1";
+        } else {
+            v = "0";
+        }
+        x.add(new cod_parametros("1", v));
+        
+        
 
         cod_parametros.modicarParametros(x);
         llenarParametro();
@@ -2828,6 +2939,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -2861,7 +2973,9 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
@@ -2894,6 +3008,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JLabel jl_nombreRestaurante;
     private javax.swing.JLabel jl_nombreRestaurante1;
     private javax.swing.JLabel jl_nombreRestaurante11;
+    private javax.swing.JLabel jl_nombreRestaurante12;
     private javax.swing.JLabel jl_nombreRestaurante2;
     private javax.swing.JLabel jl_nombreRestaurante3;
     private javax.swing.JLabel jl_nombreRestaurante4;
@@ -2907,6 +3022,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JLabel jl_usuario;
     private javax.swing.JSpinner js_p_TMxP;
     private javax.swing.JSpinner js_p_TMxR;
+    private javax.swing.JSpinner js_p_propina;
     private javax.swing.JLabel jtitulo;
     private javax.swing.JPanel panel3;
     private javax.swing.JPanel panel_Parametro;
@@ -2919,6 +3035,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JTable tb_productos;
     private javax.swing.JTable tb_usuarios;
     private javax.swing.JToggleButton tbtn_p_TkP;
+    private javax.swing.JToggleButton tbtn_p_entorno;
     private javax.swing.JToggleButton tbtn_p_login;
     private javax.swing.JToggleButton tbtn_p_tkNP;
     private javax.swing.JTextField tf_buscar_mesas;

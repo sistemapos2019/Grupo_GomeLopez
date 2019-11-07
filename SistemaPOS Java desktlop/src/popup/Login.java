@@ -239,7 +239,8 @@ public class Login extends javax.swing.JDialog {
         
         if (x.isEstado()==true) {
             if (dash==3) {
-                Dashboard a = new  Dashboard(cod_parametros.valorLogin(), x);
+                int entorno = Integer.parseInt(Conexion.valorId("1"));
+                Dashboard a = new  Dashboard(cod_parametros.valorLogin(), x, entorno);
                 a.setVisible(true);
             }
             dispose();

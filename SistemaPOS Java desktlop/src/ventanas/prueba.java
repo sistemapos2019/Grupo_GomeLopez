@@ -18,9 +18,7 @@ public class prueba extends javax.swing.JFrame {
         initComponents();
         //this.lector.setVisible(false);
         
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Introduce un texto");
-        System.out.println(reader.next());
+        
 
     }
 
@@ -34,9 +32,6 @@ public class prueba extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        Modificar = new javax.swing.JPanel();
-        lector = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -48,90 +43,23 @@ public class prueba extends javax.swing.JFrame {
             }
         });
 
-        lector.setText("jTextField1");
-        lector.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        lector.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                lectorFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                lectorFocusLost(evt);
-            }
-        });
-        lector.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                lectorKeyPressed(evt);
-            }
-        });
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout ModificarLayout = new javax.swing.GroupLayout(Modificar);
-        Modificar.setLayout(ModificarLayout);
-        ModificarLayout.setHorizontalGroup(
-            ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ModificarLayout.createSequentialGroup()
-                .addGap(428, 428, 428)
-                .addComponent(lector, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(458, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ModificarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(396, 396, 396))
-        );
-        ModificarLayout.setVerticalGroup(
-            ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ModificarLayout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(lector, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(166, 166, 166))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(Modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 1150, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(Modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 661, Short.MAX_VALUE)
         );
 
         setBounds(0, 0, 1168, 708);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lectorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lectorKeyPressed
-
-    }//GEN-LAST:event_lectorKeyPressed
-
-    private void lectorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lectorFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lectorFocusGained
-
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
         
     }//GEN-LAST:event_formKeyTyped
-
-    private void lectorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lectorFocusLost
-        
-    }//GEN-LAST:event_lectorFocusLost
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        lector();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void lector(){
         Scanner reader = new Scanner(System.in);
@@ -178,9 +106,6 @@ public class prueba extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Modificar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField lector;
     // End of variables declaration//GEN-END:variables
 }

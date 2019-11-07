@@ -354,6 +354,29 @@ public class cod_orden {
     }
     
     
+    /*
+    ******************calcular propina
+    */
+    public static String calcularPropina(String orden, String total){
+        double prop = Double.parseDouble(Conexion.valorId("13"));
+        prop = prop/100;
+        double t = Double.parseDouble(total);
+        
+        double p= t*prop;
+        String propina;
+        propina = String.format("%.2f", p);
+        return propina;
+    }
+    
+    public static String CalcularTotal(String t, String p){
+        double to = Double.parseDouble(t);
+        Double pr = Double.parseDouble(p);
+        
+        Double tt= to+pr;
+        String ctt = String.format("%.2f", tt);
+        return ctt;
+    }
+    
     
     /******************************************************************************************************************
      *                                Guardar orden modificada
@@ -471,6 +494,7 @@ public class cod_orden {
             try {
                 TicketNPre(orden, md);
                 tickets.printPDF("NoPreparacion.pdf");
+                
             } catch (PrintException | PDFException | PrinterException | IOException ex) {
                 Logger.getLogger(cod_orden.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -481,10 +505,42 @@ public class cod_orden {
     
     
     
+    /*
+    ********************** generar tiket d compra
+    */
+    public static void tiketCompra(String ord, String st, String pr, String tt, String entr, String vuel, DefaultTableModel md){
+        
+        try {
+            tickets.pdf_recibo(ord, st, pr, tt, entr, vuel, md);
+            try {
+                tickets.printPDF("recibo.pdf");
+                //tikets.(ord, st, pr, tt, entr, vuel, md);
+            } catch (IOException | PrinterException ex) {
+                Logger.getLogger(cod_orden.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (DocumentException | FileNotFoundException ex) {
+            Logger.getLogger(cod_orden.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     
+    /*
+    **************** codigo d barra
+    */
     
-    
-    
+    public static void codigoBarra(String code){
+        String er = code.substring(0, 1);
+        String num=code.substring(1, code.length());
+        
+        if (er.equals("C")) {
+            String q = "UPDATE orden SET tiempoPreparado =NULL WHERE id='" + num +"'" ;
+            Conexion.ejecutar(q);
+        } else if( er.equals("P")){
+            String q = "UPDATE orden SET tiempoRapido =NULL WHERE id='" + num +"'" ;
+            Conexion.ejecutar(q);
+        }
+        
+    }
     
     
     //constructor  -- set & get

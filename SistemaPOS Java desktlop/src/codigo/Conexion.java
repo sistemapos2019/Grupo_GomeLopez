@@ -250,6 +250,9 @@ public class Conexion {
         return nombre;
     }
     
+    
+    //para parametros
+    
     public static String valorId(String x){
         String q= "SELECT valor FROM parametro WHERE id='"+ x +"'";
         resultado = obtenerValores(q);
