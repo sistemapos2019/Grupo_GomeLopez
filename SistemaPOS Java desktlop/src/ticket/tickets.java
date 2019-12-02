@@ -12,6 +12,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.Barcode128;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -42,8 +43,10 @@ public class tickets {
 
         // Se crea el documento
         Document documento = new Document();
+        Rectangle pageSize = new Rectangle(250f, 900f); //ancho y alto
+        documento.setPageSize(pageSize);
 
-        // El OutPutStream para el fichero donde crearemos el PDF
+        // El OutPutStream para el fichero donde creaemos el PDF
         FileOutputStream ficheroPDF = new FileOutputStream("cocina.pdf");
 
         // Se asocia el documento de OutPutStream
@@ -55,7 +58,7 @@ public class tickets {
         // Parrafo
         Paragraph titulo = new Paragraph("Ticket cocina \n\n",
                 FontFactory.getFont("arial",
-                        22,
+                        10,
                         Font.BOLD,
                         BaseColor.BLACK
                 )
@@ -67,13 +70,14 @@ public class tickets {
         // Creamos una tabla
         PdfPTable tabla = new PdfPTable(2);
         tabla.getDefaultCell().setBorder(0);
-        tabla.setWidths(new int[]{5, 2});
+        tabla.setWidths(new int[]{2, 2});
+        //tabla.setTotalWidth(100);
         PdfPCell cell1 = new PdfPCell();
         PdfPCell cell2 = new PdfPCell();
-        cell1.addElement(new Paragraph("Producto", FontFactory.getFont("arial", 18, Font.PLAIN, BaseColor.BLACK)));
+        cell1.addElement(new Paragraph("Producto", FontFactory.getFont("arial", 8, Font.PLAIN, BaseColor.BLACK)));
         tabla.addCell(cell1);
 
-        cell2.addElement(new Paragraph("Cantidad", FontFactory.getFont("arial", 18, Font.PLAIN, BaseColor.BLACK)));
+        cell2.addElement(new Paragraph("Cantidad", FontFactory.getFont("arial", 8, Font.PLAIN, BaseColor.BLACK)));
         tabla.addCell(cell2);
 
         for (int i = 0; i < md.getRowCount(); i++) {
@@ -114,6 +118,8 @@ public class tickets {
 
         // Se crea el documento
         Document documento = new Document();
+        Rectangle pageSize = new Rectangle(250f, 900f); //ancho y alto
+        documento.setPageSize(pageSize);
 
         // El OutPutStream para el fichero donde crearemos el PDF
         FileOutputStream ficheroPDF = new FileOutputStream("NoPreparacion.pdf");
@@ -127,7 +133,7 @@ public class tickets {
         // Parrafo
         Paragraph titulo = new Paragraph("Ticket NO preparacion \n\n",
                 FontFactory.getFont("arial",
-                        22,
+                        10,
                         Font.BOLD,
                         BaseColor.BLACK
                 )
@@ -142,10 +148,10 @@ public class tickets {
         tabla.setWidths(new int[]{5, 2});
         PdfPCell cell1 = new PdfPCell();
         PdfPCell cell2 = new PdfPCell();
-        cell1.addElement(new Paragraph("Producto", FontFactory.getFont("arial", 18, Font.PLAIN, BaseColor.BLACK)));
+        cell1.addElement(new Paragraph("Producto", FontFactory.getFont("arial", 8, Font.PLAIN, BaseColor.BLACK)));
         tabla.addCell(cell1);
 
-        cell2.addElement(new Paragraph("Cantidad", FontFactory.getFont("arial", 18, Font.PLAIN, BaseColor.BLACK)));
+        cell2.addElement(new Paragraph("Cantidad", FontFactory.getFont("arial", 8, Font.PLAIN, BaseColor.BLACK)));
         tabla.addCell(cell2);
 
         for (int i = 0; i < md.getRowCount(); i++) {
@@ -221,6 +227,8 @@ public class tickets {
 
         // Se crea el documento
         Document documento = new Document();
+        Rectangle pageSize = new Rectangle(250f, 900f); //ancho y alto
+        documento.setPageSize(pageSize);
 
         // El OutPutStream para el fichero donde crearemos el PDF
         FileOutputStream ficheroPDF = new FileOutputStream("recibo.pdf");
@@ -240,12 +248,15 @@ public class tickets {
         
         Paragraph titulo = new Paragraph(nombreN+" \n\n",
                 FontFactory.getFont("arial",
-                        22,
+                        8,
                         Font.BOLD,
                         BaseColor.BLACK
                 )
         );
-        Paragraph subtitulo = new Paragraph(giro+"\n"+direccion+"\n"+nit+"\n\n");
+        Paragraph subtitulo = new Paragraph(giro+"\n"+direccion+"\n"+nit+"\n\n", FontFactory.getFont("arial",
+                        8,
+                        Font.BOLD,
+                        BaseColor.BLACK ));
         
         
 
@@ -257,15 +268,23 @@ public class tickets {
         PdfPTable tabla = new PdfPTable(4);
         tabla.getDefaultCell().setBorder(0);
         //tabla.setWidths(new int[]{5, 2});
-        PdfPCell cell1 = new PdfPCell();
-        PdfPCell cell2 = new PdfPCell();
-        cell1.addElement(new Paragraph("Producto", FontFactory.getFont("arial", 18, Font.PLAIN, BaseColor.BLACK)));
-        tabla.addCell("Cant.");
+        PdfPCell cant = new PdfPCell();
+        PdfPCell producto = new PdfPCell();
+        PdfPCell precio = new PdfPCell();
+        PdfPCell tot = new PdfPCell();
+        
+        cant.addElement(new Paragraph("cant.", FontFactory.getFont("arial", 5, Font.PLAIN, BaseColor.BLACK)));
+        producto.addElement(new Paragraph("producto", FontFactory.getFont("arial", 5, Font.PLAIN, BaseColor.BLACK)));
+        precio.addElement(new Paragraph("precio", FontFactory.getFont("arial", 5, Font.PLAIN, BaseColor.BLACK)));
+        tot.addElement(new Paragraph("total", FontFactory.getFont("arial", 5, Font.PLAIN, BaseColor.BLACK)));
+        //cant.addElement(new Paragraph("cant.", FontFactory.getFont("arial", 1, Font.PLAIN, BaseColor.BLACK)));
+        
+        tabla.addCell(cant);
 
-        cell2.addElement(new Paragraph("Cantidad", FontFactory.getFont("arial", 18, Font.PLAIN, BaseColor.BLACK)));
-        tabla.addCell("Producto");
-        tabla.addCell("precio");
-        tabla.addCell("total:");
+        //cell2.addElement(new Paragraph("Cantidad", FontFactory.getFont("arial", 1, Font.PLAIN, BaseColor.BLACK)));
+        tabla.addCell(producto);
+        tabla.addCell(precio);
+        tabla.addCell(tot);
         
         for (int i = 0; i < md.getRowCount(); i++) {
                 tabla.addCell(md.getValueAt(i, 2).toString());
