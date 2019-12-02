@@ -1,0 +1,6 @@
+========================
+Conectar con Mysql
+========================
+
+Usuario en mysql : 	SistemaPOS
+Contraseña:		POS2019sis
