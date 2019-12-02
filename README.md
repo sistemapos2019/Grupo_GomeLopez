@@ -7,6 +7,12 @@ GOMEZ HERNANDEZ,JOSE MIGUEL  GH12033
 
 
   LOPEZ GUZMAN,OSCAR DANILO    LG13028
+  
+#Pagina web
+
+https://sistemapos2019.github.io/Grupo_GomezLopez/
+
+
 
 # Planificación de pruebas del sistema
 El siguiente documento en google Drive contiene el documento del manual de pruebas: 
